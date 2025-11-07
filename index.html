@@ -23,7 +23,7 @@
         html {
             scroll-behavior: smooth;
         }
-        /* ===== NEW MODAL STYLES ===== */
+        /* ===== MODAL STYLES ===== */
         .modal-thumbnail {
             cursor: pointer;
             border: 2px solid transparent;
@@ -33,10 +33,24 @@
         .modal-thumbnail:hover {
             border-color: #ec4899; /* pink-500 */
         }
+
+        /* ===== NEW: Unfolding/Scroll Reveal Animation ===== */
+        /* Initial state for elements to be revealed */
+        .js-reveal {
+            opacity: 0;
+            transform: translateY(40px); /* Start 40px down */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
+        }
+        /* Final state when 'is-visible' class is added */
+        .js-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0); /* Move back to original position */
+        }
     </style>
 </head>
 <body class="bg-pink-50 text-gray-900 antialiased">
-    <header class="bg-white sticky top-0 z-10 border-b border-gray-200 relative">
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-10 relative">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center flex-wrap">
             
             <a href="#" class="flex items-center gap-3 hover:opacity-80 transition-opacity duration-300">
@@ -69,7 +83,7 @@
                 </div>
             </div>
 
-            <div id="mobile-menu" class="hidden w-full lg:hidden mt-4">
+            <div id="mobile-menu" class="w-full lg:hidden mt-4 overflow-hidden max-h-0 opacity-0 transition-all duration-500 ease-in-out">
                 <ul class="flex flex-col space-y-2">
                     <li><a href="#what-is-manga" class="block text-lg text-gray-600 hover:bg-gray-100 rounded p-2 font-medium transition duration-300" data-key="nav_what_is_manga">What is Manga?</a></li>
                     <li><a href="#more-about-manga" class="block text-lg text-gray-600 hover:bg-gray-100 rounded p-2 font-medium transition duration-300" data-key="nav_more_about">More About Manga</a></li>
@@ -107,7 +121,7 @@
 
                     <div class="lg:col-span-2 space-y-10">
 
-                    <article class="p-8 rounded-lg shadow-xl border border-gray-200" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
+                    <article class="p-8 rounded-lg shadow-xl border border-gray-200 js-reveal" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
                         <h3 class="text-3xl font-bold text-gray-900 mb-6" data-key="art_title">The Art of Manga (漫画)</h3>
                         <p class="text-lg leading-relaxed text-gray-900" data-key="art_p1">
                             Manga (漫画) are comics or graphic novels originating from Japan. They possess a distinct visual style and are a massive part of Japanese culture, read by people of all ages. Unlike most Western comics, manga is typically printed in black and white.
@@ -121,7 +135,7 @@
                         </div>
                     </article>
 
-                    <article class="p-8 rounded-lg shadow-xl border border-gray-200" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
+                    <article class="p-8 rounded-lg shadow-xl border border-gray-200 js-reveal" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
                         <h3 class="text-3xl font-bold text-gray-900 mb-6" data-key="history_title">A Brief History</h3>
                         <p class="text-lg leading-relaxed text-gray-900" data-key="history_p1">
                             While modern manga developed in the post-WWII era, its roots can be traced back centuries to early Japanese art, like the 12th-century *Chōjū-giga* (Scrolls of Frolicking Animals).
@@ -131,7 +145,7 @@
                         </p>
                     </article>
 
-                    <article class="p-8 rounded-lg shadow-xl border border-gray-200" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
+                    <article class="p-8 rounded-lg shadow-xl border border-gray-200 js-reveal" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
                         <h3 class="text-3xl font-bold text-gray-900 mb-6" data-key="global_title">A Global Phenomenon</h3>
                         <p class="text-lg leading-relaxed text-gray-900" data-key="global_p1">
                             Manga started out quietly in Japan, but soon it caught everyone’s eye with its bold art, emotional stories, and unforgettable characters. What began as simple black-and-white comics after World War II slowly turned into a huge part of Japanese life—you’d see people reading manga everywhere: on trains, in cafés, even during lunch breaks! Then came creators like Osamu Tezuka, who gave manga heart and soul, turning it into a true storytelling art.
@@ -141,7 +155,7 @@
                         </p>
                     </article>
 
-                    <article class="p-8 rounded-lg shadow-xl border border-gray-200" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
+                    <article class="p-8 rounded-lg shadow-xl border border-gray-200 js-reveal" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
                         <h3 class="text-3xl font-bold text-gray-900 mb-6" data-key="demo_title">Key Demographics & Genres</h3>
                         <p class="text-lg leading-relaxed text-gray-900 mb-6" data-key="demo_p1">
                             Manga is often categorized by its target demographic, which influences its themes and genres:
@@ -167,7 +181,7 @@
                     </article>
                 </div>
 
-                <aside class="lg:col-span-1 space-y-8 h-full">
+                <aside class="lg:col-span-1 space-y-8 h-full js-reveal">
 
                     <div class="text-gray-100 p-8 rounded-lg shadow-xl border border-gray-700 h-full flex flex-col" style="background-image: linear-gradient(rgba(31, 41, 55, 0.8), rgba(31, 41, 55, 0.8)), url('bg2.jpg'); background-size: cover; background-position: center;">
                         <h3 class="text-2xl font-bold mb-4 text-white" data-key="read_title">How to Read Manga</h3>
@@ -263,7 +277,7 @@
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <div id="open-op-modal" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200 hover:shadow-xl cursor-pointer">
+                <div id="open-op-modal" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200 hover:shadow-xl cursor-pointer js-reveal">
                     <img src="op.jpg" alt="One Piece Volume 1 Cover" class="w-full h-[500px] object-cover" onerror="this.src='httpsiaside://placehold.co/600x400/CCCCCC/000000?text=Image+Error'">
                     <div class="p-6">
                         <h4 class="font-bold text-xl text-gray-900" data-key="iconic_op_title">One Piece</h4>
@@ -272,7 +286,7 @@
                     </div>
                 </div>
                 
-                <div id="open-toni-modal" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200 hover:shadow-xl cursor-pointer">
+                <div id="open-toni-modal" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200 hover:shadow-xl cursor-pointer js-reveal">
                     <img src="tonikawa.jpg" alt="Tonikawa Volume Cover" class="w-full h-[500px] object-cover" onerror="this.src='https://placehold.co/600x400/CCCCCC/000000?text=Image+Error'">
                     <div class="p-6">
                         <h4 class="font-bold text-xl text-gray-900" data-key="iconic_toni_title">Tonikawa: Over the Moon for You</h4>
@@ -281,7 +295,7 @@
                     </div>
                 </div>
                 
-                <div id="open-rag-modal" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200 hover:shadow-xl cursor-pointer">
+                <div id="open-rag-modal" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200 hover:shadow-xl cursor-pointer js-reveal">
                     <img src="rag.jpg" alt="Rent-a-Girlfriend Volume Cover" class="w-full h-[500px] object-cover" onerror="this.src='https://placehold.co/600x400/CCCCCC/000000?text=Image+Error'">
                     <div class="p-6">
                         <h4 class="font-bold text-xl text-gray-900" data-key="iconic_rag_title">Rent-a-Girlfriend</h4>
@@ -289,7 +303,8 @@
                         <p class="text-pink-600 font-semibold mt-2" data-key="iconic_rag_gallery">Click to view samples</p>
                     </div>
                 </div>
-                <div id="open-bl-modal" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200 hover:shadow-xl cursor-pointer">
+                
+                <div id="open-bl-modal" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200 hover:shadow-xl cursor-pointer js-reveal">
                     <img src="bl.jpg" alt="Blue Lock Volume Cover" class="w-full h-[500px] object-cover" onerror="this.src='https://placehold.co/600x400/CCCCCC/000000?text=Image+Error'">
                     <div class="p-6">
                         <h4 class="font-bold text-xl text-gray-900" data-key="iconic_bl_title">Blue Lock</h4>
@@ -297,7 +312,8 @@
                         <p class="text-pink-600 font-semibold mt-2" data-key="iconic_bl_gallery">Click to view samples</p>
                     </div>
                 </div>
-                <div id="open-dn-modal" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200 hover:shadow-xl cursor-pointer">
+                
+                <div id="open-dn-modal" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200 hover:shadow-xl cursor-pointer js-reveal">
                     <img src="dn.jpg" alt="Death Note Cover" class="w-full h-[500px] object-cover" onerror="this.src='https://placehold.co/600x400/CCCCCC/000000?text=Image+Error'">
                     <div class="p-6">
                         <h4 class="font-bold text-xl text-gray-900" data-key="iconic_dn_title">Death Note</h4>
@@ -306,7 +322,7 @@
                     </div>
                 </div>
 
-                <div id="open-tr-modal" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200 hover:shadow-xl cursor-pointer">
+                <div id="open-tr-modal" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200 hover:shadow-xl cursor-pointer js-reveal">
                     <img src="tr.jpg" alt="Tokyo Revengers Cover" class="w-full h-[500px] object-cover" onerror="this.src='https://placehold.co/600x400/CCCCCC/000000?text=Image+Error'">
                     <div class="p-6">
                         <h4 class="font-bold text-xl text-gray-900" data-key="iconic_tr_title">Tokyo Revengers</h4>
@@ -327,19 +343,13 @@
                 <h3 class="text-2xl font-semibold text-gray-900" data-key="iconic_bl_title_modal">Blue Lock Samples</h3>
                 <button id="close-bl-modal" class="text-gray-500 hover:text-gray-900 text-3xl">&times;</button>
             </div>
-
             <div class="p-4 flex-grow overflow-y-auto">
                 <div class="relative mb-4">
                     <img id="bl-modal-main-image" src="bl1.jpg" alt="Sample 1" class="w-full h-auto max-h-[60vh] object-contain rounded">
-                    <button id="bl-modal-prev" class="absolute top-1/2 left-2 -translate-y-1/2 bg-white/50 hover:bg-white/80 rounded-full p-2 text-gray-900 text-2xl">
-                        &#10094;
-                    </button>
-                    <button id="bl-modal-next" class="absolute top-1/2 right-2 -translate-y-1/2 bg-white/50 hover:bg-white/80 rounded-full p-2 text-gray-900 text-2xl">
-                        &#10095;
-                    </button>
+                    <button id="bl-modal-prev" class="absolute top-1/2 left-2 -translate-y-1/2 bg-white/50 hover:bg-white/80 rounded-full p-2 text-gray-900 text-2xl">&#10094;</button>
+                    <button id="bl-modal-next" class="absolute top-1/2 right-2 -translate-y-1/2 bg-white/50 hover:bg-white/80 rounded-full p-2 text-gray-900 text-2xl">&#10095;</button>
                 </div>
-                <div id="bl-modal-thumbnails" class="flex justify-center gap-2 flex-wrap">
-                    </div>
+                <div id="bl-modal-thumbnails" class="flex justify-center gap-2 flex-wrap"></div>
             </div>
         </div>
     </div>
@@ -350,19 +360,13 @@
                 <h3 class="text-2xl font-semibold text-gray-900" data-key="iconic_rag_title_modal">Rent-a-Girlfriend Samples</h3>
                 <button id="close-rag-modal" class="text-gray-500 hover:text-gray-900 text-3xl">&times;</button>
             </div>
-
             <div class="p-4 flex-grow overflow-y-auto">
                 <div class="relative mb-4">
                     <img id="rag-modal-main-image" src="rent1.webp" alt="Sample 1" class="w-full h-auto max-h-[60vh] object-contain rounded">
-                    <button id="rag-modal-prev" class="absolute top-1/2 left-2 -translate-y-1/2 bg-white/50 hover:bg-white/80 rounded-full p-2 text-gray-900 text-2xl">
-                        &#10094;
-                    </button>
-                    <button id="rag-modal-next" class="absolute top-1/2 right-2 -translate-y-1/2 bg-white/50 hover:bg-white/80 rounded-full p-2 text-gray-900 text-2xl">
-                        &#10095;
-                    </button>
+                    <button id="rag-modal-prev" class="absolute top-1/2 left-2 -translate-y-1/2 bg-white/50 hover:bg-white/80 rounded-full p-2 text-gray-900 text-2xl">&#10094;</button>
+                    <button id="rag-modal-next" class="absolute top-1/2 right-2 -translate-y-1/2 bg-white/50 hover:bg-white/80 rounded-full p-2 text-gray-900 text-2xl">&#10095;</button>
                 </div>
-                <div id="rag-modal-thumbnails" class="flex justify-center gap-2 flex-wrap">
-                    </div>
+                <div id="rag-modal-thumbnails" class="flex justify-center gap-2 flex-wrap"></div>
             </div>
         </div>
     </div>
@@ -449,12 +453,17 @@
     </footer>
 
     <script>
+        // SCRIPT: Unfolding mobile menu
         document.getElementById('menu-toggle').addEventListener('click', function() {
             var mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.remove('hidden');
+            if (mobileMenu.classList.contains('opacity-0')) {
+                // Open the menu
+                mobileMenu.classList.remove('max-h-0', 'opacity-0');
+                mobileMenu.classList.add('max-h-96', 'opacity-100', 'bg-white/80', 'backdrop-blur-md'); 
             } else {
-                mobileMenu.classList.add('hidden');
+                // Close the menu
+                mobileMenu.classList.remove('max-h-96', 'opacity-100', 'bg-white/80', 'backdrop-blur-md');
+                mobileMenu.classList.add('max-h-0', 'opacity-0');
             }
         });
     </script>
@@ -531,12 +540,10 @@
                 "iconic_tr_text": "By Ken Wakui. A delinquent travels back in time to save his girlfriend from being murdered by a gang.",
                 "footer_made_by": "Made By:",
                 "footer_copyright": "&copy; 2025 Manga Den. An informational website created to explain manga.",
-                
                 "iconic_bl_gallery": "Click to view samples",
                 "iconic_bl_title_modal": "Blue Lock Samples",
                 "iconic_rag_gallery": "Click to view samples",
                 "iconic_rag_title_modal": "Rent-a-Girlfriend Samples",
-
                 "iconic_op_gallery": "Click to view samples",
                 "iconic_op_title_modal": "One Piece Samples",
                 "iconic_toni_gallery": "Click to view samples",
@@ -616,12 +623,10 @@
                 "iconic_tr_text": "和久井健作。不良だった主人公が、恋人をギャングに殺されたのを機に過去にタイムリープする。",
                 "footer_made_by": "制作者:",
                 "footer_copyright": "&copy; 2025 Manga Den. 漫画を説明するために作成された情報ウェブサイト。",
-
                 "iconic_bl_gallery": "サンプルを見る",
                 "iconic_bl_title_modal": "ブルーロック サンプル",
                 "iconic_rag_gallery": "サンプルを見る",
                 "iconic_rag_title_modal": "彼女、お借りします サンプル",
-
                 "iconic_op_gallery": "サンプルを見る",
                 "iconic_op_title_modal": "ONE PIECE サンプル",
                 "iconic_toni_gallery": "サンプルを見る",
@@ -696,7 +701,6 @@
             // ===== Blue Lock Modal Script =====
             const blImages = ['bl1.jpg', 'bl2.jpg', 'bl3.jpg', 'bl4.jpg'];
             let currentBlImageIndex = 0;
-
             const openBlModalBtn = document.getElementById('open-bl-modal');
             const blModal = document.getElementById('bl-modal');
             const closeBlModalBtn = document.getElementById('close-bl-modal');
@@ -704,87 +708,54 @@
             const blPrevBtn = document.getElementById('bl-modal-prev');
             const blNextBtn = document.getElementById('bl-modal-next');
             const blThumbnailContainer = document.getElementById('bl-modal-thumbnails');
-
-            // Create thumbnails
             if(blThumbnailContainer) {
-                blThumbnailContainer.innerHTML = ''; // Clear any existing
+                blThumbnailContainer.innerHTML = ''; 
                 blImages.forEach((imgSrc, index) => {
                     const thumb = document.createElement('img');
                     thumb.src = imgSrc;
                     thumb.alt = `Blue Lock Sample ${index + 1}`;
                     thumb.classList.add('modal-thumbnail', 'w-20', 'h-20', 'object-cover', 'rounded');
                     thumb.dataset.index = index;
-                    thumb.addEventListener('click', () => {
-                        openBlModal(index);
-                    });
+                    thumb.addEventListener('click', () => openBlModal(index));
                     blThumbnailContainer.appendChild(thumb);
                 });
             }
-
             const blThumbnailElements = blThumbnailContainer ? blThumbnailContainer.querySelectorAll('.modal-thumbnail') : [];
-
             function updateBlModalImage() {
+                if(!blModalImg) return;
                 blModalImg.src = blImages[currentBlImageIndex];
                 blModalImg.alt = `Blue Lock Sample ${currentBlImageIndex + 1}`;
-                // Update active thumbnail
                 blThumbnailElements.forEach((thumb, index) => {
-                    if (index === currentBlImageIndex) {
-                        thumb.classList.add('active');
-                    } else {
-                        thumb.classList.remove('active');
-                    }
+                    if (index === currentBlImageIndex) thumb.classList.add('active');
+                    else thumb.classList.remove('active');
                 });
             }
-
             function openBlModal(index) {
                 currentBlImageIndex = index;
                 updateBlModalImage();
                 blModal.classList.remove('hidden');
             }
-
-            function closeBlModal() {
-                blModal.classList.add('hidden');
-            }
-
+            function closeBlModal() { blModal.classList.add('hidden'); }
             function showNextBlImage() {
                 currentBlImageIndex = (currentBlImageIndex + 1) % blImages.length;
                 updateBlModalImage();
             }
-
             function showPrevBlImage() {
                 currentBlImageIndex = (currentBlImageIndex - 1 + blImages.length) % blImages.length;
                 updateBlModalImage();
             }
-
-            // Event Listeners
-            if(openBlModalBtn) {
-                openBlModalBtn.addEventListener('click', () => openBlModal(0));
-            }
-            if(closeBlModalBtn) {
-                closeBlModalBtn.addEventListener('click', closeBlModal);
-            }
-            if(blNextBtn) {
-                blNextBtn.addEventListener('click', showNextBlImage);
-            }
-            if(blPrevBtn) {
-                blPrevBtn.addEventListener('click', showPrevBlImage);
-            }
-            
-            // Close modal on backdrop click
-            if(blModal) {
-                blModal.addEventListener('click', (e) => {
-                    if (e.target === blModal) {
-                        closeBlModal();
-                    }
-                });
-            }
+            if(openBlModalBtn) openBlModalBtn.addEventListener('click', () => openBlModal(0));
+            if(closeBlModalBtn) closeBlModalBtn.addEventListener('click', closeBlModal);
+            if(blNextBtn) blNextBtn.addEventListener('click', showNextBlImage);
+            if(blPrevBtn) blPrevBtn.addEventListener('click', showPrevBlImage);
+            if(blModal) blModal.addEventListener('click', (e) => {
+                if (e.target === blModal) closeBlModal();
+            });
             // ===== End Blue Lock Modal Script =====
-
 
             // ===== Rent-a-Girlfriend Modal Script =====
             const ragImages = ['rent1.webp', 'rent2.webp', 'rent3.webp', 'rent4.jpg'];
             let currentRagImageIndex = 0;
-
             const openRagModalBtn = document.getElementById('open-rag-modal');
             const ragModal = document.getElementById('rag-modal');
             const closeRagModalBtn = document.getElementById('close-rag-modal');
@@ -792,86 +763,54 @@
             const ragPrevBtn = document.getElementById('rag-modal-prev');
             const ragNextBtn = document.getElementById('rag-modal-next');
             const ragThumbnailContainer = document.getElementById('rag-modal-thumbnails');
-
-            // Create thumbnails
             if(ragThumbnailContainer) {
-                ragThumbnailContainer.innerHTML = ''; // Clear any existing
+                ragThumbnailContainer.innerHTML = ''; 
                 ragImages.forEach((imgSrc, index) => {
                     const thumb = document.createElement('img');
                     thumb.src = imgSrc;
                     thumb.alt = `Rent-a-Girlfriend Sample ${index + 1}`;
                     thumb.classList.add('modal-thumbnail', 'w-20', 'h-20', 'object-cover', 'rounded');
                     thumb.dataset.index = index;
-                    thumb.addEventListener('click', () => {
-                        openRagModal(index);
-                    });
+                    thumb.addEventListener('click', () => openRagModal(index));
                     ragThumbnailContainer.appendChild(thumb);
                 });
             }
-
             const ragThumbnailElements = ragThumbnailContainer ? ragThumbnailContainer.querySelectorAll('.modal-thumbnail') : [];
-
             function updateRagModalImage() {
+                if(!ragModalImg) return;
                 ragModalImg.src = ragImages[currentRagImageIndex];
                 ragModalImg.alt = `Rent-a-Girlfriend Sample ${currentRagImageIndex + 1}`;
-                // Update active thumbnail
                 ragThumbnailElements.forEach((thumb, index) => {
-                    if (index === currentRagImageIndex) {
-                        thumb.classList.add('active');
-                    } else {
-                        thumb.classList.remove('active');
-                    }
+                    if (index === currentRagImageIndex) thumb.classList.add('active');
+                    else thumb.classList.remove('active');
                 });
             }
-
             function openRagModal(index) {
                 currentRagImageIndex = index;
                 updateRagModalImage();
                 ragModal.classList.remove('hidden');
             }
-
-            function closeRagModal() {
-                ragModal.classList.add('hidden');
-            }
-
+            function closeRagModal() { ragModal.classList.add('hidden'); }
             function showNextRagImage() {
                 currentRagImageIndex = (currentRagImageIndex + 1) % ragImages.length;
                 updateRagModalImage();
             }
-
             function showPrevRagImage() {
                 currentRagImageIndex = (currentRagImageIndex - 1 + ragImages.length) % ragImages.length;
                 updateRagModalImage();
             }
-
-            // Event Listeners
-            if(openRagModalBtn) {
-                openRagModalBtn.addEventListener('click', () => openRagModal(0));
-            }
-            if(closeRagModalBtn) {
-                closeRagModalBtn.addEventListener('click', closeRagModal);
-            }
-            if(ragNextBtn) {
-                ragNextBtn.addEventListener('click', showNextRagImage);
-            }
-            if(ragPrevBtn) {
-                ragPrevBtn.addEventListener('click', showPrevRagImage);
-            }
-            
-            // Close modal on backdrop click
-            if(ragModal) {
-                ragModal.addEventListener('click', (e) => {
-                    if (e.target === ragModal) {
-                        closeRagModal();
-                    }
-                });
-            }
+            if(openRagModalBtn) openRagModalBtn.addEventListener('click', () => openRagModal(0));
+            if(closeRagModalBtn) closeRagModalBtn.addEventListener('click', closeRagModal);
+            if(ragNextBtn) ragNextBtn.addEventListener('click', showNextRagImage);
+            if(ragPrevBtn) ragPrevBtn.addEventListener('click', showPrevRagImage);
+            if(ragModal) ragModal.addEventListener('click', (e) => {
+                if (e.target === ragModal) closeRagModal();
+            });
             // ===== End Rent-a-Girlfriend Modal Script =====
 
             // ===== One Piece Modal Script =====
             const opImages = ['op1.jpg', 'op2.webp', 'op3.jpg', 'op4.jpg'];
             let currentOpImageIndex = 0;
-
             const openOpModalBtn = document.getElementById('open-op-modal');
             const opModal = document.getElementById('op-modal');
             const closeOpModalBtn = document.getElementById('close-op-modal');
@@ -879,7 +818,6 @@
             const opPrevBtn = document.getElementById('op-modal-prev');
             const opNextBtn = document.getElementById('op-modal-next');
             const opThumbnailContainer = document.getElementById('op-modal-thumbnails');
-
             if(opThumbnailContainer) {
                 opThumbnailContainer.innerHTML = '';
                 opImages.forEach((imgSrc, index) => {
@@ -892,9 +830,7 @@
                     opThumbnailContainer.appendChild(thumb);
                 });
             }
-
             const opThumbnailElements = opThumbnailContainer ? opThumbnailContainer.querySelectorAll('.modal-thumbnail') : [];
-
             function updateOpModalImage() {
                 if(!opModalImg) return;
                 opModalImg.src = opImages[currentOpImageIndex];
@@ -904,13 +840,11 @@
                     else thumb.classList.remove('active');
                 });
             }
-
             function openOpModal(index) {
                 currentOpImageIndex = index;
                 updateOpModalImage();
                 opModal.classList.remove('hidden');
             }
-
             function closeOpModal() { opModal.classList.add('hidden'); }
             function showNextOpImage() {
                 currentOpImageIndex = (currentOpImageIndex + 1) % opImages.length;
@@ -920,7 +854,6 @@
                 currentOpImageIndex = (currentOpImageIndex - 1 + opImages.length) % opImages.length;
                 updateOpModalImage();
             }
-
             if(openOpModalBtn) openOpModalBtn.addEventListener('click', () => openOpModal(0));
             if(closeOpModalBtn) closeOpModalBtn.addEventListener('click', closeOpModal);
             if(opNextBtn) opNextBtn.addEventListener('click', showNextOpImage);
@@ -933,7 +866,6 @@
             // ===== Tonikawa Modal Script =====
             const toniImages = ['toni1.png', 'toni2.png', 'toni3.png', 'toni4.png'];
             let currentToniImageIndex = 0;
-
             const openToniModalBtn = document.getElementById('open-toni-modal');
             const toniModal = document.getElementById('toni-modal');
             const closeToniModalBtn = document.getElementById('close-toni-modal');
@@ -941,7 +873,6 @@
             const toniPrevBtn = document.getElementById('toni-modal-prev');
             const toniNextBtn = document.getElementById('toni-modal-next');
             const toniThumbnailContainer = document.getElementById('toni-modal-thumbnails');
-
             if(toniThumbnailContainer) {
                 toniThumbnailContainer.innerHTML = '';
                 toniImages.forEach((imgSrc, index) => {
@@ -954,9 +885,7 @@
                     toniThumbnailContainer.appendChild(thumb);
                 });
             }
-
             const toniThumbnailElements = toniThumbnailContainer ? toniThumbnailContainer.querySelectorAll('.modal-thumbnail') : [];
-
             function updateToniModalImage() {
                 if(!toniModalImg) return;
                 toniModalImg.src = toniImages[currentToniImageIndex];
@@ -966,13 +895,11 @@
                     else thumb.classList.remove('active');
                 });
             }
-
             function openToniModal(index) {
                 currentToniImageIndex = index;
                 updateToniModalImage();
                 toniModal.classList.remove('hidden');
             }
-
             function closeToniModal() { toniModal.classList.add('hidden'); }
             function showNextToniImage() {
                 currentToniImageIndex = (currentToniImageIndex + 1) % toniImages.length;
@@ -982,7 +909,6 @@
                 currentToniImageIndex = (currentToniImageIndex - 1 + toniImages.length) % toniImages.length;
                 updateToniModalImage();
             }
-
             if(openToniModalBtn) openToniModalBtn.addEventListener('click', () => openToniModal(0));
             if(closeToniModalBtn) closeToniModalBtn.addEventListener('click', closeToniModal);
             if(toniNextBtn) toniNextBtn.addEventListener('click', showNextToniImage);
@@ -995,7 +921,6 @@
             // ===== Death Note Modal Script =====
             const dnImages = ['dn1.jpg', 'dn2.webp', 'dn3.png', 'dn4.webp'];
             let currentDnImageIndex = 0;
-
             const openDnModalBtn = document.getElementById('open-dn-modal');
             const dnModal = document.getElementById('dn-modal');
             const closeDnModalBtn = document.getElementById('close-dn-modal');
@@ -1003,7 +928,6 @@
             const dnPrevBtn = document.getElementById('dn-modal-prev');
             const dnNextBtn = document.getElementById('dn-modal-next');
             const dnThumbnailContainer = document.getElementById('dn-modal-thumbnails');
-
             if(dnThumbnailContainer) {
                 dnThumbnailContainer.innerHTML = '';
                 dnImages.forEach((imgSrc, index) => {
@@ -1016,9 +940,7 @@
                     dnThumbnailContainer.appendChild(thumb);
                 });
             }
-
             const dnThumbnailElements = dnThumbnailContainer ? dnThumbnailContainer.querySelectorAll('.modal-thumbnail') : [];
-
             function updateDnModalImage() {
                 if(!dnModalImg) return;
                 dnModalImg.src = dnImages[currentDnImageIndex];
@@ -1028,13 +950,11 @@
                     else thumb.classList.remove('active');
                 });
             }
-
             function openDnModal(index) {
                 currentDnImageIndex = index;
                 updateDnModalImage();
                 dnModal.classList.remove('hidden');
             }
-
             function closeDnModal() { dnModal.classList.add('hidden'); }
             function showNextDnImage() {
                 currentDnImageIndex = (currentDnImageIndex + 1) % dnImages.length;
@@ -1044,7 +964,6 @@
                 currentDnImageIndex = (currentDnImageIndex - 1 + dnImages.length) % dnImages.length;
                 updateDnModalImage();
             }
-
             if(openDnModalBtn) openDnModalBtn.addEventListener('click', () => openDnModal(0));
             if(closeDnModalBtn) closeDnModalBtn.addEventListener('click', closeDnModal);
             if(dnNextBtn) dnNextBtn.addEventListener('click', showNextDnImage);
@@ -1057,7 +976,6 @@
             // ===== Tokyo Revengers Modal Script =====
             const trImages = ['tr1.jpeg', 'tr2.jpg', 'tr3.jpg', 'tr4.jpeg'];
             let currentTrImageIndex = 0;
-
             const openTrModalBtn = document.getElementById('open-tr-modal');
             const trModal = document.getElementById('tr-modal');
             const closeTrModalBtn = document.getElementById('close-tr-modal');
@@ -1065,7 +983,6 @@
             const trPrevBtn = document.getElementById('tr-modal-prev');
             const trNextBtn = document.getElementById('tr-modal-next');
             const trThumbnailContainer = document.getElementById('tr-modal-thumbnails');
-
             if(trThumbnailContainer) {
                 trThumbnailContainer.innerHTML = '';
                 trImages.forEach((imgSrc, index) => {
@@ -1078,9 +995,7 @@
                     trThumbnailContainer.appendChild(thumb);
                 });
             }
-
             const trThumbnailElements = trThumbnailContainer ? trThumbnailContainer.querySelectorAll('.modal-thumbnail') : [];
-
             function updateTrModalImage() {
                 if(!trModalImg) return;
                 trModalImg.src = trImages[currentTrImageIndex];
@@ -1090,13 +1005,11 @@
                     else thumb.classList.remove('active');
                 });
             }
-
             function openTrModal(index) {
                 currentTrImageIndex = index;
                 updateTrModalImage();
                 trModal.classList.remove('hidden');
             }
-
             function closeTrModal() { trModal.classList.add('hidden'); }
             function showNextTrImage() {
                 currentTrImageIndex = (currentTrImageIndex + 1) % trImages.length;
@@ -1106,7 +1019,6 @@
                 currentTrImageIndex = (currentTrImageIndex - 1 + trImages.length) % trImages.length;
                 updateTrModalImage();
             }
-
             if(openTrModalBtn) openTrModalBtn.addEventListener('click', () => openTrModal(0));
             if(closeTrModalBtn) closeTrModalBtn.addEventListener('click', closeTrModal);
             if(trNextBtn) trNextBtn.addEventListener('click', showNextTrImage);
@@ -1115,6 +1027,30 @@
                 if (e.target === trModal) closeTrModal();
             });
             // ===== End Tokyo Revengers Modal Script =====
+
+            // ===== NEW: Scroll Reveal Animation Script =====
+            const revealElements = document.querySelectorAll('.js-reveal');
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Optional: Stop observing once it's visible to save resources
+                        // observer.unobserve(entry.target);
+                    }
+                    // Optional: Re-hide when scrolling up (uncomment the else block)
+                    // else {
+                    //     entry.target.classList.remove('is-visible');
+                    // }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+            // ===== End Scroll Reveal Animation Script =====
 
         });
     </script>
