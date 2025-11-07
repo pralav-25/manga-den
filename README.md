@@ -1,0 +1,2 @@
+# manga-den
+about manga
