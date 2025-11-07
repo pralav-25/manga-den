@@ -5,26 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What is Manga? An Introduction</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Yuji+Syuku&display=swap" rel="stylesheet">
+    
     <style>
-        /* Apply Merriweather to headings, Inter to body */
+        /* Apply Inter to body. Increased base font size and line height for readability. */
         body {
             font-family: 'Inter', sans-serif;
+            font-size: 1.125rem;  /* 18px */
+            line-height: 1.7;     /* Increased spacing */
         }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Merriweather', serif;
+        
+        /* MODIFIED: Custom class for the new logo text (Brush font) */
+        .logo-text {
+            font-family: 'Yuji Syuku', serif;
         }
+
+        /* MODIFIED: Custom class for the Japanese text */
+        .logo-text-jp {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
         /* Add smooth scrolling */
         html {
             scroll-behavior: smooth;
         }
     </style>
 </head>
-<body class="bg-stone-100 text-gray-900 antialiased">
+<body class="bg-pink-50 text-gray-900 antialiased">
     <header class="bg-white sticky top-0 z-10 border-b border-gray-200">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-3xl font-bold text-gray-900">Manga Den</h1>
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            
+            <a href="#" class="flex items-center gap-3 hover:opacity-80 transition-opacity duration-300">
+                <img src="logo.png" alt="Manga Den Logo" class="h-14 w-auto">
+                <div class="flex flex-col">
+                    <span class="logo-text text-4xl text-gray-900 leading-tight">Manga Den</span>
+                    <span class="logo-text-jp text-lg text-gray-700 leading-tight">漫画堂</span>
+                </div>
+            </a>
+            
             <ul class="flex space-x-8">
                 <li><a href="#what-is-manga" class="text-lg text-gray-600 hover:text-gray-900 font-medium transition duration-300">What is Manga?</a></li>
                 <li><a href="#more-about-manga" class="text-lg text-gray-600 hover:text-gray-900 font-medium transition duration-300">More About Manga</a></li>
@@ -35,113 +54,168 @@
 
     <section id="what-is-manga" class="py-24 px-6 text-center border-b-2 border-gray-900" style="background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('bg1.jpg'); background-size: cover; background-position: center;">
         <h2 class="text-6xl font-bold text-gray-900 mb-4">What is Manga?</h2>
-        <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+        <p class="text-xl text-gray-900 max-w-3xl mx-auto">
             Discover the captivating world of Japanese comics, from their unique art style to their global impact.
         </p>
+        <a href="#more-about-manga" class="mt-8 inline-block bg-gray-900 text-white font-semibold py-3 px-8 rounded-lg text-lg shadow-lg hover:bg-gray-700 transition duration-300">
+            Start Learning
+        </a>
     </section>
 
-    <main id="more-about-manga" class="py-16" style="background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('bg3.png'); background-size: cover; background-position: left center;">
-        <div class="container mx-auto px-6 max-w-7xl">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+    <main>
+        <section id="more-about-manga" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
 
-                <div class="lg:col-span-2 space-y-10">
+                    <div class="lg:col-span-2 space-y-10">
 
-                <article class="p-8 rounded-lg shadow-xl border border-gray-200" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
-                    <h3 class="text-3xl font-bold text-gray-900 mb-6">The Art of Manga (漫画)</h3>
-                    <p class="text-lg leading-relaxed text-gray-700">
-                        Manga (漫画) are comics or graphic novels originating from Japan. They possess a distinct visual style and are a massive part of Japanese culture, read by people of all ages. Unlike most Western comics, manga is typically printed in black and white.
-                    </D>
-                    <p class="text-lg leading-relaxed text-gray-700 mt-4">
-                        This art form covers a vast range of genres, from high-fantasy action to grounded slice-of-life drama. Its influence has spread globally, inspiring comics, animation (known as "anime"), and films worldwide.
-                    </p>
-                    
-                    <div class="my-8 text-center">
-                        <img src="manga_panel_example.jpg" alt="Manga panel example" class="w-full h-auto rounded-md border-2 border-gray-900">
-                        <p class="text-sm text-gray-600 mt-3 italic">An example of a manga page layout (FLARE-ZERO by Salvatore Nives)</p>
-                    </div>
-                </article>
-
-                <article class="p-8 rounded-lg shadow-xl border border-gray-200" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
-                    <h3 class="text-3xl font-bold text-gray-900 mb-6">A Brief History</h3>
-                    <p class="text-lg leading-relaxed text-gray-700">
-                        While modern manga developed in the post-WWII era, its roots can be traced back centuries to early Japanese art, like the 12th-century *Chōjū-giga* (Scrolls of Frolicking Animals).
-                    </p>
-                    <p class="text-lg leading-relaxed text-gray-700 mt-4">
-                        The art form as we know it today was heavily shaped by artists like Osamu Tezuka, the creator of *Astro Boy*. He introduced the signature large-eyed art style and cinematic panel layouts that are now characteristic of manga.
-                    </p>
-                </article>
-
-                <article class="p-8 rounded-lg shadow-xl border border-gray-200" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
-                    <h3 class="text-3xl font-bold text-gray-900 mb-6">Key Demographics & Genres</h3>
-                    <p class="text-lg leading-relaxed text-gray-700 mb-6">
-                        Manga is often categorized by its target demographic, which influences its themes and genres:
-                    </D>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="bg-gray-50 p-6 rounded-md border border-gray-200">
-                            <strong class="text-xl font-semibold text-gray-900">Shonen (少年)</strong>
-                            <p class="text-gray-700 mt-1">Aimed at teen boys. Typically focuses on action, adventure, and themes of friendship and perseverance. (e.g., *One Piece, Naruto*)</p>
+                    <article class="p-8 rounded-lg shadow-xl border border-gray-200" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-6">The Art of Manga (漫画)</h3>
+                        <p class="text-lg leading-relaxed text-gray-900">
+                            Manga (漫画) are comics or graphic novels originating from Japan. They possess a distinct visual style and are a massive part of Japanese culture, read by people of all ages. Unlike most Western comics, manga is typically printed in black and white.
+                        </p> <p class="text-lg leading-relaxed text-gray-900 mt-4">
+                            This art form covers a vast range of genres, from high-fantasy action to grounded slice-of-life drama. Its influence has spread globally, inspiring comics, animation (known as "anime"), and films worldwide.
+                        </p>
+                        
+                        <div class="my-8 text-center">
+                            <img src="panel.png" alt="Manga panel example" class="w-full h-auto rounded-md border-2 border-gray-900">
+                            <p class="text-sm text-gray-600 mt-3 italic">An example of a manga page layout (FLARE-ZERO by Salvatore Nives)</p>
                         </div>
-                        <div class="bg-gray-50 p-6 rounded-md border border-gray-200">
-                            <strong class="text-xl font-semibold text-gray-900">Shojo (少女)</strong>
-                            <p class="text-gray-700 mt-1">Aimed at teen girls. Often focuses on romance, drama, and personal relationships. (e.g., *Sailor Moon, Fruits Basket*)</p>
-                        </div>
-                        <div class="bg-gray-50 p-6 rounded-md border border-gray-200">
-                            <strong class="text-xl font-semibold text-gray-900">Seinen (青年)</strong>
-                            <p class="text-gray-700 mt-1">Aimed at adult men. Features more mature themes, psychological depth, and complex plots. (e.g., *Berserk, Vinland Saga*)</p>
-                        </div>
-                        <div class="bg-gray-50 p-6 rounded-md border border-gray-200">
-                            <strong class="text-xl font-semibold text-gray-900">Josei (女性)</strong>
-                            <p class="text-gray-700 mt-1">Aimed at adult women. Explores realistic themes, adult relationships, and the challenges of life. (e.g., *Chihayafuru, Princess Jellyfish*)</p>
-                        </div>
-                    </div>
-                </article>
-            </div>
+                    </article>
 
-            <aside class="lg:col-span-1 space-y-8">
+                    <article class="p-8 rounded-lg shadow-xl border border-gray-200" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-6">A Brief History</h3>
+                        <p class="text-lg leading-relaxed text-gray-900">
+                            While modern manga developed in the post-WWII era, its roots can be traced back centuries to early Japanese art, like the 12th-century *Chōjū-giga* (Scrolls of Frolicking Animals).
+                        </p>
+                        <p class="text-lg leading-relaxed text-gray-900 mt-4">
+                            The art form as we know it today was heavily shaped by artists like Osamu Tezuka, the creator of *Astro Boy*. He introduced the signature large-eyed art style and cinematic panel layouts that are now characteristic of manga.
+                        </p>
+                    </article>
 
-                <div class="bg-gray-800 text-gray-100 p-8 rounded-lg shadow-xl border border-gray-700">
-                    <h3 class="text-2xl font-bold mb-4 text-white">How to Read Manga</h3>
-                    <p class="text-lg leading-relaxed mb-6 text-gray-200">
-                        For new readers, this is the most important part! Manga is read in the original Japanese format:
-                    </D>
-                    <ul class="list-disc list-inside space-y-2 text-lg text-gray-200">
-                        <li>From **Right to Left**</li>
-                        <li>From **Top to Bottom**</li>
-                    </ul>
-                    <p class="text-lg leading-relaxed mt-4 mb-6 text-gray-200">
-                        You start at the top-right panel on the page and read it. Then, you read the panel to its left. Once you finish the top row, you move to the next row down, again starting from the right.
-                    </D>
-                    
-                    <div class="space-y-2">
-                        <p class="text-center font-semibold text-white">Page Flow</p>
-                        <div class="flex justify-between items-center bg-stone-200 text-gray-900 p-4 rounded-md shadow-inner">
-                            <div class="text-center">
-                                <div class="bg-white w-16 h-12 flex items-center justify-center font-bold text-2xl rounded shadow border-2 border-gray-400">2</div>
-                                <span class="text-sm mt-1">Second</span>
+                    <article class="p-8 rounded-lg shadow-xl border border-gray-200" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-6">A Global Phenomenon</h3>
+                        <p class="text-lg leading-relaxed text-gray-900">
+                            Manga started out quietly in Japan, but soon it caught everyone’s eye with its bold art, emotional stories, and unforgettable characters. What began as simple black-and-white comics after World War II slowly turned into a huge part of Japanese life—you’d see people reading manga everywhere: on trains, in cafés, even during lunch breaks! Then came creators like Osamu Tezuka, who gave manga heart and soul, turning it into a true storytelling art.
+                        </p>
+                        <p class="text-lg leading-relaxed text-gray-900 mt-4">
+                            Once anime based on manga started airing, the craze exploded beyond Japan—suddenly the whole world was hooked. From action-packed adventures like Naruto to emotional tales like Your Name, manga became more than just comics—it became a global obsession, inspiring millions of fans to read, draw, and even dream in panels and speech bubbles.
+                        </p>
+                    </article>
+                    <article class="p-8 rounded-lg shadow-xl border border-gray-200" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-6">Key Demographics & Genres</h3>
+                        <p class="text-lg leading-relaxed text-gray-900 mb-6">
+                            Manga is often categorized by its target demographic, which influences its themes and genres:
+                        </p> <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 p-6 rounded-md border border-gray-200">
+                                <strong class="text-xl font-semibold text-gray-900">Shonen (少年)</strong>
+                                <p class="text-gray-900 mt-1">Aimed at teen boys. Typically focuses on action, adventure, and themes of friendship and perseverance. (e.g., *One Piece, Naruto*)</p>
                             </div>
-                            <div class="text-center">
-                                <div class="bg-white w-16 h-12 flex items-center justify-center font-bold text-2xl rounded shadow border-4 border-black">1</div>
-                                <span class="text-sm mt-1 font-bold">START</span>
+                            <div class="bg-gray-50 p-6 rounded-md border border-gray-200">
+                                <strong class="text-xl font-semibold text-gray-900">Shojo (少女)</strong>
+                                <p class="text-gray-900 mt-1">Aimed at teen girls. Often focuses on romance, drama, and personal relationships. (e.g., *Sailor Moon, Fruits Basket*)</p>
+                            </div>
+                            <div class="bg-gray-50 p-6 rounded-md border border-gray-200">
+                                <strong class="text-xl font-semibold text-gray-900">Seinen (青年)</strong>
+                                <p class="text-gray-900 mt-1">Aimed at adult men. Features more mature themes, psychological depth, and complex plots. (e.g., *Berserk, Vinland Saga*)</p>
+</div>
+                            <div class="bg-gray-50 p-6 rounded-md border border-gray-200">
+                                <strong class="text-xl font-semibold text-gray-900">Josei (女性)</strong>
+                                <p class="text-gray-900 mt-1">Aimed at adult women. Explores realistic themes, adult relationships, and the challenges of life. (e.g., *Chihayafuru, Princess Jellyfish*)</p>
                             </div>
                         </div>
-                        <div class="flex justify-between items-center bg-stone-200 text-gray-900 p-4 rounded-md shadow-inner">
-                            <div class="text-center">
-                                <div class="bg-white w-16 h-12 flex items-center justify-center font-bold text-2xl rounded shadow border-2 border-gray-400">4</div>
-                                <span class="text-sm mt-1">Fourth</span>
-                            </div>
-                            <div class="text-center">
-                                <div class="bg-white w-16 h-12 flex items-center justify-center font-bold text-2xl rounded shadow border-2 border-gray-400">3</div>
-                                <span class="text-sm mt-1">Third</span>
-                            </div>
-                        </div>
-                    </div>
+                    </article>
                 </div>
-            </aside>
-        </div>
-    </div>
-    </main>
 
-    <section id="iconics" class="bg-stone-50 py-20 border-t border-gray-200">
+                <aside class="lg:col-span-1 space-y-8 h-full">
+
+                    <div class="text-gray-100 p-8 rounded-lg shadow-xl border border-gray-700 h-full flex flex-col" style="background-image: linear-gradient(rgba(31, 41, 55, 0.8), rgba(31, 41, 55, 0.8)), url('bg2.jpg'); background-size: cover; background-position: center;">
+                        <h3 class="text-2xl font-bold mb-4 text-white">How to Read Manga</h3>
+                        <p class="text-lg leading-relaxed mb-6 text-white">
+                            For new readers, this is the most important part! Manga is read in the original Japanese format:
+                        </p> <ul class="list-disc list-inside space-y-2 text-lg text-white">
+                            <li>From **Right to Left**</li>
+                            <li>From **Top to Bottom**</li>
+                        </ul>
+                        <p class="text-lg leading-relaxed mt-4 mb-6 text-white">
+                            You start at the top-right panel on the page and read it. Then, you read the panel to its left. Once you finish the top row, you move to the next row down, again starting from the right.
+                        </p>
+                        
+                        <div class="space-y-2">
+                            <p class="text-center font-semibold text-white">Page Flow</p>
+                            <div class="flex justify-between items-center bg-stone-200 text-gray-900 p-4 rounded-md shadow-inner">
+                                <div class="text-center">
+                                    <div class="w-16 h-12 flex items-center justify-center font-bold text-2xl rounded shadow border-2 border-gray-400" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">2</div>
+                                    <span class="text-sm mt-1">Second</span>
+                                </div>
+                                <div class="text-center">
+                                    <div class="w-16 h-12 flex items-center justify-center font-bold text-2xl rounded shadow-lg border-4 border-blue-800" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">1</div>
+                                    <span class="text-sm mt-1 font-bold">START</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center bg-stone-200 text-gray-900 p-4 rounded-md shadow-inner">
+                                <div class="text-center">
+                                    <div class="w-16 h-12 flex items-center justify-center font-bold text-2xl rounded shadow border-2 border-gray-400" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">4</div>
+                                    <span class="text-sm mt-1">Fourth</span>
+                                </div>
+                                <div class="text-center">
+                                    <div class="w-16 h-12 flex items-center justify-center font-bold text-2xl rounded shadow border-2 border-gray-400" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">3</div>
+                                    <span class="text-sm mt-1">Third</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8">
+                            <h4 class="text-xl font-bold mb-4 text-white">Tips for New Readers</h4>
+                            <ul class="space-y-5 text-white"> <li>
+                                    <strong class="text-white">1. Book & Page Order:</strong>
+                                    Always remember, the entire book is "backward" from a Western perspective. The "front cover" (with the title) is on the right, and you read from what feels like the "back" of the book.
+                                </li>
+                                <li>
+                                    <strong class="text-white">2. Panel Flow:</strong>
+                                    Your eye should follow the panels, not just the text. The general rule is top-right to bottom-left. If panels are stacked vertically, read them top-to-bottom before moving to the next column on the left.
+                                </li>
+                                <li>
+                                    <strong class="text-white">3. Dialogue Order:</strong>
+                                    Inside a single panel, you also read speech bubbles right-to-left, top-to-bottom. The bubble highest up and furthest to the right is read first.
+                                </li>
+                                <li>
+                                    <strong class="text-white">4. Speech Bubble Types:</strong>
+                                    Pay attention to the bubble's design!
+                                    <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                                        <li><strong>Standard Bubble:</strong> Normal speech.</li>
+                                        <li><strong>Spiky Bubble:</strong> Shouting or exclamations.</li>
+                                        <li><strong>Bubbly/Cloud-like:</strong> Thoughts or daydreams.</li>
+                                        <li><strong>Wiggly/Drippy:</strong> Fear, sickness, or sarcasm.</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <strong class="text-white">5. Sound Effects (SFX):</strong>
+                                    The large Japanese characters drawn into the art (e.g., ゴゴゴ or "gogogo") are sound effects. They are part of the art and meant to be *felt* as much as read. Official translations often include small, translated text nearby to explain them.
+                                </li>
+                                <li>
+                                    <strong class="text-white">6. Gutter & Bleed:</strong>
+                                    The "gutter" is the white space *between* panels. If a panel's art "bleeds" all the way to the edge of the page, it often implies a flashback, a dream sequence, or a very dramatic moment happening in the present.
+                                </li>
+                                <li>
+                                    <strong class="text-white">7. Emotional Cues:</strong>
+                                    Manga uses a unique visual language for emotions. Look for common symbols:
+                                    <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                                        <li><strong>Large Sweat Drop:</strong> Embarrassment, stress, or exasperation.</li>
+                                        <li><strong>Popping Vein:</strong> Anger or frustration.</li>
+                                        <li><strong>"Chibi" Form:</strong> The character is drawn small and cute to show a moment of comedy or lack of seriousness.</li>
+                                        <li><strong>Dark Lines:</strong> Vertical lines on the face or in the background often mean shock, gloom, or despair.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <section id="iconics" class="bg-white py-20 border-t border-gray-200">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold text-center text-gray-900 mb-16">
                 Iconic Manga Examples
@@ -149,10 +223,10 @@
             <div class="grid grid-cols-1 sm:grid-2 lg:grid-cols-3 gap-8">
                 
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200 hover:shadow-xl">
-                    <img src="op.jpg" alt="One Piece Volume 1 Cover" class="w-full h-[500px] object-cover" onerror="this.src='https://placehold.co/600x400/CCCCCC/000000?text=Image+Error'">
+                    <img src="op.jpg" alt="One Piece Volume 1 Cover" class="w-full h-[500px] object-cover" onerror="this.src='httpsiaside://placehold.co/600x400/CCCCCC/000000?text=Image+Error'">
                     <div class="p-6">
                         <h4 class="font-bold text-xl text-gray-900">One Piece</h4>
-                        <p class="text-gray-700 mt-2">By Eiichiro Oda. An epic fantasy adventure following Monkey D. Luffy and his pirate crew in search of the ultimate treasure.</p>
+                        <p class="text-gray-900 mt-2">By Eiichiro Oda. An epic fantasy adventure following Monkey D. Luffy and his pirate crew in search of the ultimate treasure.</p>
                     </div>
                 </div>
                 
@@ -160,7 +234,7 @@
                     <img src="tonikawa.jpg" alt="Tonikawa Volume Cover" class="w-full h-[500px] object-cover" onerror="this.src='https://placehold.co/600x400/CCCCCC/000000?text=Image+Error'">
                     <div class="p-6">
                         <h4 class="font-bold text-xl text-gray-900">Tonikawa: Over the Moon for You</h4>
-                        <p class="text-gray-700 mt-2">By Kenjiro Hata. A heartwarming romantic comedy about a boy named Nasa who marries a mysterious girl named Tsukasa.</p>
+                        <p class="text-gray-900 mt-2">By Kenjiro Hata. A heartwarming romantic comedy about a boy named Nasa who marries a mysterious girl named Tsukasa.</p>
                     </div>
                 </div>
                 
@@ -168,7 +242,7 @@
                     <img src="rag.jpg" alt="Rent-a-Girlfriend Volume Cover" class="w-full h-[500px] object-cover" onerror="this.src='https://placehold.co/600x400/CCCCCC/000000?text=Image+Error'">
                     <div class="p-6">
                         <h4 class="font-bold text-xl text-gray-900">Rent-a-Girlfriend</h4>
-                        <p class="text-gray-700 mt-2">By Reiji Miyajima. A popular shonen romantic comedy about a college student who hires a rental girlfriend after a bad breakup.</p>
+                        <p class="text-gray-900 mt-2">By Reiji Miyajima. A popular shonen romantic comedy about a college student who hires a rental girlfriend after a bad breakup.</p>
                     </div>
                 </div>
 
@@ -176,7 +250,7 @@
                     <img src="bl.jpg" alt="Blue Lock Volume Cover" class="w-full h-[500px] object-cover" onerror="this.src='https://placehold.co/600x400/CCCCCC/000000?text=Image+Error'">
                     <div class="p-6">
                         <h4 class="font-bold text-xl text-gray-900">Blue Lock</h4>
-                        <p class="text-gray-700 mt-2">By Muneyuki Kaneshiro & Yusuke Nomura. A high school soccer player enters a mysterious training facility to create the world's best striker.</p>
+                        <p class="text-gray-900 mt-2">By Muneyuki Kaneshiro & Yusuke Nomura. A high school soccer player enters a mysterious training facility to create the world's best striker.</p>
                     </div>
                 </div>
 
@@ -184,7 +258,7 @@
                     <img src="dn.jpg" alt="Death Note Cover" class="w-full h-[500px] object-cover" onerror="this.src='https://placehold.co/600x400/CCCCCC/000000?text=Image+Error'">
                     <div class="p-6">
                         <h4 class="font-bold text-xl text-gray-900">Death Note</h4>
-                        <p class="text-gray-700 mt-2">By Tsugumi Ohba and Takeshi Obata. A psychological thriller about a high school student who discovers a supernatural notebook.</p>
+                        <p class="text-gray-900 mt-2">By Tsugumi Ohba and Takeshi Obata. A psychological thriller about a high school student who discovers a supernatural notebook.</p>
                     </div>
                 </div>
 
@@ -192,7 +266,7 @@
                     <img src="tr.jpg" alt="Tokyo Revengers Cover" class="w-full h-[500px] object-cover" onerror="this.src='https://placehold.co/600x400/CCCCCC/000000?text=Image+Error'">
                     <div class="p-6">
                         <h4 class="font-bold text-xl text-gray-900">Tokyo Revengers</h4>
-                        <p class="text-gray-700 mt-2">By Ken Wakui. A delinquent travels back in time to save his girlfriend from being murdered by a gang.</p>
+                        <p class="text-gray-900 mt-2">By Ken Wakui. A delinquent travels back in time to save his girlfriend from being murdered by a gang.</p>
                     </div>
                 </div>
 
@@ -200,8 +274,19 @@
         </div>
     </section>
 
-    <footer class="bg-stone-200 text-gray-700 text-center p-8 mt-0 border-t border-gray-300">
-        <p>&copy; 2025 Manga Den. An informational website created to explain manga.</p>
+    </main> 
+    
+    <footer class="bg-gray-900 text-gray-300 text-center p-10 mt-0">
+        <p class="font-semibold text-white text-lg mb-4">Made By:</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-y-3 gap-x-4 max-w-3xl mx-auto text-gray-400 mb-8">
+            <p>PRALAV KUMAR SINGH</p>
+            <p>ROHIT GY</p>
+            <p>ADITYA SINGH SENGAR</p>
+            <p>V SAHANA</p>
+            <p>YASHWI JAIN</p>
+            <p>RISHAB UPADHYAY</p>
+        </div>
+        <p class="text-gray-500 text-sm">&copy; 2025 Manga Den. An informational website created to explain manga.</p>
     </footer>
 
 </body>
