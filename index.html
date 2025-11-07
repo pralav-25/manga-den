@@ -34,22 +34,105 @@
             border-color: #ec4899; /* pink-500 */
         }
 
-        /* ===== NEW: Unfolding/Scroll Reveal Animation ===== */
-        /* Initial state for elements to be revealed */
+        /* ===== Unfolding/Scroll Reveal Animation ===== */
         .js-reveal {
             opacity: 0;
             transform: translateY(40px); /* Start 40px down */
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
             will-change: opacity, transform;
         }
-        /* Final state when 'is-visible' class is added */
         .js-reveal.is-visible {
             opacity: 1;
             transform: translateY(0); /* Move back to original position */
         }
+
+        /* ===== Memory Game Styles ===== */
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+            perspective: 1000px; /* For 3D flip */
+        }
+        .game-card {
+            width: 100%;
+            aspect-ratio: 1 / 1; /* Make cards square */
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        .game-card.is-flipped {
+            transform: rotateY(180deg);
+        }
+        .game-card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* Hides the back of the card when flipped */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-front {
+            background-color: #ec4899; /* pink-500 */
+            color: white;
+            font-size: 2.5rem; /* Icon size */
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .card-back {
+            background-color: #374151; /* gray-700 */
+            color: white;
+            font-size: 3rem;
+            transform: rotateY(180deg);
+        }
+        .game-card.is-matched {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        /* ===== NEW: Trivia Game Styles ===== */
+        .trivia-option {
+            display: block;
+            width: 100%;
+            background-color: white;
+            border: 2px solid #374151; /* gray-700 */
+            color: #374151;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.125rem;
+            font-weight: 500;
+            text-align: left;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .trivia-option:hover:not(:disabled) {
+            background-color: #f3f4f6; /* gray-100 */
+            border-color: #ec4899; /* pink-500 */
+            color: #ec4899;
+        }
+        .trivia-option.correct {
+            background-color: #10b981; /* emerald-500 */
+            border-color: #10b981;
+            color: white;
+        }
+        .trivia-option.wrong {
+            background-color: #ef4444; /* red-500 */
+            border-color: #ef4444;
+            color: white;
+        }
+        .trivia-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body class="bg-pink-50 text-gray-900 antialiased">
+    <!-- HEADER: Added glassmorphism effect and new "Trivia" link -->
     <header class="bg-white/80 backdrop-blur-md sticky top-0 z-10 relative">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center flex-wrap">
             
@@ -72,6 +155,8 @@
                     <li><a href="#what-is-manga" class="text-lg text-gray-600 hover:text-gray-900 font-medium transition duration-300" data-key="nav_what_is_manga">What is Manga?</a></li>
                     <li><a href="#more-about-manga" class="text-lg text-gray-600 hover:text-gray-900 font-medium transition duration-300" data-key="nav_more_about">More About Manga</a></li>
                     <li><a href="#iconics" class="text-lg text-gray-600 hover:text-gray-900 font-medium transition duration-300" data-key="nav_iconics">Iconics</a></li>
+                    <li><a href="#game" class="text-lg text-gray-600 hover:text-gray-900 font-medium transition duration-300" data-key="nav_game">Game</a></li>
+                    <li><a href="#trivia" class="text-lg text-gray-600 hover:text-gray-900 font-medium transition duration-300" data-key="nav_trivia">Trivia</a></li> <!-- NEW TRIVIA LINK -->
                 </ul>
                 
                 <div class="lang-toggle flex items-center gap-2 text-base font-medium text-gray-500">
@@ -83,11 +168,14 @@
                 </div>
             </div>
 
+            <!-- MOBILE MENU: Unfolding animation and new "Trivia" link -->
             <div id="mobile-menu" class="w-full lg:hidden mt-4 overflow-hidden max-h-0 opacity-0 transition-all duration-500 ease-in-out">
                 <ul class="flex flex-col space-y-2">
                     <li><a href="#what-is-manga" class="block text-lg text-gray-600 hover:bg-gray-100 rounded p-2 font-medium transition duration-300" data-key="nav_what_is_manga">What is Manga?</a></li>
                     <li><a href="#more-about-manga" class="block text-lg text-gray-600 hover:bg-gray-100 rounded p-2 font-medium transition duration-300" data-key="nav_more_about">More About Manga</a></li>
                     <li><a href="#iconics" class="block text-lg text-gray-600 hover:bg-gray-100 rounded p-2 font-medium transition duration-300" data-key="nav_iconics">Iconics</a></li>
+                    <li><a href="#game" class="block text-lg text-gray-600 hover:bg-gray-100 rounded p-2 font-medium transition duration-300" data-key="nav_game">Game</a></li>
+                    <li><a href="#trivia" class="block text-lg text-gray-600 hover:bg-gray-100 rounded p-2 font-medium transition duration-300" data-key="nav_trivia">Trivia</a></li> <!-- NEW TRIVIA LINK -->
                 </ul>
                 
                 <div class="lang-toggle flex items-center justify-between p-2 mt-2 border-t border-gray-200">
@@ -120,7 +208,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
 
                     <div class="lg:col-span-2 space-y-10">
-
+                    <!-- Article 1 -->
                     <article class="p-8 rounded-lg shadow-xl border border-gray-200 js-reveal" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
                         <h3 class="text-3xl font-bold text-gray-900 mb-6" data-key="art_title">The Art of Manga (漫画)</h3>
                         <p class="text-lg leading-relaxed text-gray-900" data-key="art_p1">
@@ -128,13 +216,13 @@
                         </p> <p class="text-lg leading-relaxed text-gray-900 mt-4" data-key="art_p2">
                             This art form covers a vast range of genres, from high-fantasy action to grounded slice-of-life drama. Its influence has spread globally, inspiring comics, animation (known as "anime"), and films worldwide.
                         </p>
-                        
                         <div class="my-8 text-center">
                             <img src="panel.png" alt="Manga panel example" class="w-full h-auto rounded-md border-2 border-gray-900">
                             <p class="text-sm text-gray-600 mt-3 italic" data-key="art_caption">An example of a manga page layout (from One Piece)</p>
                         </div>
                     </article>
 
+                    <!-- Article 2 -->
                     <article class="p-8 rounded-lg shadow-xl border border-gray-200 js-reveal" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
                         <h3 class="text-3xl font-bold text-gray-900 mb-6" data-key="history_title">A Brief History</h3>
                         <p class="text-lg leading-relaxed text-gray-900" data-key="history_p1">
@@ -145,6 +233,7 @@
                         </p>
                     </article>
 
+                    <!-- Article 3 -->
                     <article class="p-8 rounded-lg shadow-xl border border-gray-200 js-reveal" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
                         <h3 class="text-3xl font-bold text-gray-900 mb-6" data-key="global_title">A Global Phenomenon</h3>
                         <p class="text-lg leading-relaxed text-gray-900" data-key="global_p1">
@@ -155,6 +244,7 @@
                         </p>
                     </article>
 
+                    <!-- Article 4 -->
                     <article class="p-8 rounded-lg shadow-xl border border-gray-200 js-reveal" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('bg2.jpg'); background-size: cover; background-position: center;">
                         <h3 class="text-3xl font-bold text-gray-900 mb-6" data-key="demo_title">Key Demographics & Genres</h3>
                         <p class="text-lg leading-relaxed text-gray-900 mb-6" data-key="demo_p1">
@@ -181,8 +271,8 @@
                     </article>
                 </div>
 
+                <!-- Aside -->
                 <aside class="lg:col-span-1 space-y-8 h-full js-reveal">
-
                     <div class="text-gray-100 p-8 rounded-lg shadow-xl border border-gray-700 h-full flex flex-col" style="background-image: linear-gradient(rgba(31, 41, 55, 0.8), rgba(31, 41, 55, 0.8)), url('bg2.jpg'); background-size: cover; background-position: center;">
                         <h3 class="text-2xl font-bold mb-4 text-white" data-key="read_title">How to Read Manga</h3>
                         <p class="text-lg leading-relaxed mb-6 text-white" data-key="read_p1">
@@ -303,7 +393,6 @@
                         <p class="text-pink-600 font-semibold mt-2" data-key="iconic_rag_gallery">Click to view samples</p>
                     </div>
                 </div>
-                
                 <div id="open-bl-modal" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200 hover:shadow-xl cursor-pointer js-reveal">
                     <img src="bl.jpg" alt="Blue Lock Volume Cover" class="w-full h-[500px] object-cover" onerror="this.src='https://placehold.co/600x400/CCCCCC/000000?text=Image+Error'">
                     <div class="p-6">
@@ -335,8 +424,66 @@
         </div>
     </section>
 
+    <!-- ===== MEMORY GAME SECTION ===== -->
+    <section id="game" class="bg-pink-100 py-20 border-t border-gray-200">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-center text-gray-900 mb-8" data-key="game_title">Manga Memory Match</h2>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-12" data-key="game_subtitle">Test your memory! Match the manga-themed pairs.</p>
+            
+            <div class="flex justify-center items-center gap-8 mb-8">
+                <div class="text-2xl font-semibold text-gray-800">
+                    <span data-key="game_moves">Moves</span>: <span id="game-moves" class="text-pink-600">0</span>
+                </div>
+                <button id="game-reset-btn" class="bg-gray-900 text-white font-semibold py-3 px-8 rounded-lg text-lg shadow-lg hover:bg-gray-700 transition duration-300" data-key="game_reset">
+                    Reset Game
+                </button>
+            </div>
+
+            <!-- Game Board -->
+            <div id="game-board" class="game-board js-reveal">
+                <!-- Cards will be generated by JavaScript -->
+            </div>
+
+            <!-- Game Win Message -->
+            <div id="game-win-message" class="hidden mt-8 text-2xl font-bold text-green-600" data-key="game_win">
+                You won! Great memory!
+            </div>
+        </div>
+    </section>
+    <!-- ===== END: MEMORY GAME SECTION ===== -->
+
+    <!-- ===== NEW: TRIVIA GAME SECTION ===== -->
+    <section id="trivia" class="bg-white py-20 border-t border-gray-200">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-center text-gray-900 mb-8" data-key="trivia_title">Manga Trivia Quiz</h2>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-12" data-key="trivia_subtitle">How much do you know about manga?</p>
+
+            <div class="max-w-2xl mx-auto bg-pink-50 p-8 rounded-lg shadow-xl js-reveal">
+                <!-- Trivia Question -->
+                <h3 id="trivia-question" class="text-2xl font-semibold text-gray-900 mb-6 h-24">
+                    Loading question...
+                </h3>
+
+                <!-- Trivia Options -->
+                <div id="trivia-options" class="space-y-3 mb-6">
+                    <!-- Options will be generated by JavaScript -->
+                </div>
+
+                <!-- Trivia Result -->
+                <div id="trivia-result" class="text-2xl font-bold text-gray-900 my-4"></div>
+
+                <!-- Next Button -->
+                <button id="trivia-next-btn" class="bg-pink-600 text-white font-semibold py-3 px-8 rounded-lg text-lg shadow-lg hover:bg-pink-700 transition duration-300 w-full" data-key="trivia_next">
+                    Next Question
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- ===== END: TRIVIA GAME SECTION ===== -->
+
     </main> 
     
+    <!-- MODALS START HERE -->
     <div id="bl-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
         <div class="bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-screen overflow-hidden flex flex-col">
             <div class="flex justify-between items-center p-4 border-b border-gray-200">
@@ -353,7 +500,6 @@
             </div>
         </div>
     </div>
-
     <div id="rag-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
         <div class="bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-screen overflow-hidden flex flex-col">
             <div class="flex justify-between items-center p-4 border-b border-gray-200">
@@ -370,7 +516,6 @@
             </div>
         </div>
     </div>
-
     <div id="op-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
         <div class="bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-screen overflow-hidden flex flex-col">
             <div class="flex justify-between items-center p-4 border-b border-gray-200">
@@ -387,7 +532,6 @@
             </div>
         </div>
     </div>
-
     <div id="toni-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
         <div class="bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-screen overflow-hidden flex flex-col">
             <div class="flex justify-between items-center p-4 border-b border-gray-200">
@@ -404,7 +548,6 @@
             </div>
         </div>
     </div>
-
     <div id="dn-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
         <div class="bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-screen overflow-hidden flex flex-col">
             <div class="flex justify-between items-center p-4 border-b border-gray-200">
@@ -421,7 +564,6 @@
             </div>
         </div>
     </div>
-
     <div id="tr-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
         <div class="bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-screen overflow-hidden flex flex-col">
             <div class="flex justify-between items-center p-4 border-b border-gray-200">
@@ -438,6 +580,7 @@
             </div>
         </div>
     </div>
+    <!-- MODALS END HERE -->
 
     <footer class="bg-gray-900 text-gray-300 text-center p-10 mt-0">
         <p class="font-semibold text-white text-lg mb-4" data-key="footer_made_by">Made By:</p>
@@ -457,11 +600,9 @@
         document.getElementById('menu-toggle').addEventListener('click', function() {
             var mobileMenu = document.getElementById('mobile-menu');
             if (mobileMenu.classList.contains('opacity-0')) {
-                // Open the menu
                 mobileMenu.classList.remove('max-h-0', 'opacity-0');
                 mobileMenu.classList.add('max-h-96', 'opacity-100', 'bg-white/80', 'backdrop-blur-md'); 
             } else {
-                // Close the menu
                 mobileMenu.classList.remove('max-h-96', 'opacity-100', 'bg-white/80', 'backdrop-blur-md');
                 mobileMenu.classList.add('max-h-0', 'opacity-0');
             }
@@ -475,6 +616,8 @@
                 "nav_what_is_manga": "What is Manga?",
                 "nav_more_about": "More About Manga",
                 "nav_iconics": "Iconics",
+                "nav_game": "Game",
+                "nav_trivia": "Trivia", // New
                 "nav_language": "Language",
                 "hero_title": "What is Manga?",
                 "hero_subtitle": "Discover the captivating world of Japanese comics, from their unique art style to their global impact.",
@@ -551,13 +694,26 @@
                 "iconic_dn_gallery": "Click to view samples",
                 "iconic_dn_title_modal": "Death Note Samples",
                 "iconic_tr_gallery": "Click to view samples",
-                "iconic_tr_title_modal": "Tokyo Revengers Samples"
+                "iconic_tr_title_modal": "Tokyo Revengers Samples",
+                "game_title": "Manga Memory Match", 
+                "game_subtitle": "Test your memory! Match the manga-themed pairs.", 
+                "game_moves": "Moves", 
+                "game_reset": "Reset Game", 
+                "game_win": "You won! Great memory!",
+                "trivia_title": "Manga Trivia Quiz", // New
+                "trivia_subtitle": "How much do you know about manga?", // New
+                "trivia_next": "Next Question", // New
+                "trivia_play_again": "Play Again?", // New
+                "trivia_result_text": "Your Score", // New
+                "trivia_of": "of" // New
             },
             "ja": {
                 "page_title": "漫画とは？入門ガイド",
                 "nav_what_is_manga": "漫画とは？",
                 "nav_more_about": "漫画について",
                 "nav_iconics": "代表作",
+                "nav_game": "ゲーム", 
+                "nav_trivia": "トリビア", // New
                 "nav_language": "言語",
                 "hero_title": "漫画とは？",
                 "hero_subtitle": "ユニークなアートスタイルから世界的な影響まで、日本のコミックの魅力的な世界を発見してください。",
@@ -634,7 +790,18 @@
                 "iconic_dn_gallery": "サンプルを見る",
                 "iconic_dn_title_modal": "DEATH NOTE サンプル",
                 "iconic_tr_gallery": "サンプルを見る",
-                "iconic_tr_title_modal": "東京卍リベンジャーズ サンプル"
+                "iconic_tr_title_modal": "東京卍リベンジャーズ サンプル",
+                "game_title": "漫画メモリーマッチ", 
+                "game_subtitle": "記憶力を試そう！漫画がテーマのペアを見つけよう。", 
+                "game_moves": "手数", 
+                "game_reset": "リセット", 
+                "game_win": "クリア！おめでとう！",
+                "trivia_title": "漫画トリビアクイズ", // New
+                "trivia_subtitle": "漫画についてどれくらい知っていますか？", // New
+                "trivia_next": "次の質問", // New
+                "trivia_play_again": "もう一度プレイ", // New
+                "trivia_result_text": "あなたのスコア", // New
+                "trivia_of": "/" // New
             }
         };
 
@@ -674,7 +841,6 @@
             document.querySelectorAll('[data-key]').forEach(el => {
                 const key = el.dataset.key;
                 if (translations[lang] && translations[lang][key]) {
-                    // Use innerHTML to support keys with HTML tags like <strong>
                     el.innerHTML = translations[lang][key];
                 }
             });
@@ -682,375 +848,314 @@
             // Update page title
             document.title = translations[lang]['page_title'] || translations['en']['page_title'];
             
-            // Update switch visuals
             updateSwitchVisuals(lang);
         }
 
-        // New function to toggle language
         function toggleLanguage() {
             const currentLang = localStorage.getItem('language') || 'en';
             const newLang = currentLang === 'en' ? 'ja' : 'en';
             setLanguage(newLang);
         }
 
-        // On page load, check for saved language
+        // On page load
         document.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('language') || 'en';
             setLanguage(savedLang);
 
-            // ===== Blue Lock Modal Script =====
-            const blImages = ['bl1.jpg', 'bl2.jpg', 'bl3.jpg', 'bl4.jpg'];
-            let currentBlImageIndex = 0;
-            const openBlModalBtn = document.getElementById('open-bl-modal');
-            const blModal = document.getElementById('bl-modal');
-            const closeBlModalBtn = document.getElementById('close-bl-modal');
-            const blModalImg = document.getElementById('bl-modal-main-image');
-            const blPrevBtn = document.getElementById('bl-modal-prev');
-            const blNextBtn = document.getElementById('bl-modal-next');
-            const blThumbnailContainer = document.getElementById('bl-modal-thumbnails');
-            if(blThumbnailContainer) {
-                blThumbnailContainer.innerHTML = ''; 
-                blImages.forEach((imgSrc, index) => {
+            // ===== Modal Scripts (All Modals) =====
+            function setupModal(modalId, openBtnId, closeBtnId, images, mainImgId, prevBtnId, nextBtnId, thumbContainerId) {
+                const openBtn = document.getElementById(openBtnId);
+                const modal = document.getElementById(modalId);
+                const closeBtn = document.getElementById(closeBtnId);
+                const mainImg = document.getElementById(mainImgId);
+                const prevBtn = document.getElementById(prevBtnId);
+                const nextBtn = document.getElementById(nextBtnId);
+                const thumbContainer = document.getElementById(thumbContainerId);
+                
+                if (!modal || !openBtn || !closeBtn || !mainImg || !prevBtn || !nextBtn || !thumbContainer) {
+                    return; 
+                }
+                let currentIndex = 0;
+                thumbContainer.innerHTML = ''; 
+                images.forEach((imgSrc, index) => {
                     const thumb = document.createElement('img');
                     thumb.src = imgSrc;
-                    thumb.alt = `Blue Lock Sample ${index + 1}`;
+                    thumb.alt = `Sample ${index + 1}`;
                     thumb.classList.add('modal-thumbnail', 'w-20', 'h-20', 'object-cover', 'rounded');
                     thumb.dataset.index = index;
-                    thumb.addEventListener('click', () => openBlModal(index));
-                    blThumbnailContainer.appendChild(thumb);
+                    thumb.addEventListener('click', () => openModal(index));
+                    thumbContainer.appendChild(thumb);
+                });
+                const thumbnailElements = thumbContainer.querySelectorAll('.modal-thumbnail');
+                function updateModalImage() {
+                    mainImg.src = images[currentIndex];
+                    thumbnailElements.forEach((thumb, index) => {
+                        if (index === currentIndex) thumb.classList.add('active');
+                        else thumb.classList.remove('active');
+                    });
+                }
+                function openModal(index) {
+                    currentIndex = index;
+                    updateModalImage();
+                    modal.classList.remove('hidden');
+                }
+                function closeModal() { modal.classList.add('hidden'); }
+                function showNext() {
+                    currentIndex = (currentIndex + 1) % images.length;
+                    updateModalImage();
+                }
+                function showPrev() {
+                    currentIndex = (currentIndex - 1 + images.length) % images.length;
+                    updateModalImage();
+                }
+                openBtn.addEventListener('click', () => openModal(0));
+                closeBtn.addEventListener('click', closeModal);
+                nextBtn.addEventListener('click', showNext);
+                prevBtn.addEventListener('click', showPrev);
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal();
                 });
             }
-            const blThumbnailElements = blThumbnailContainer ? blThumbnailContainer.querySelectorAll('.modal-thumbnail') : [];
-            function updateBlModalImage() {
-                if(!blModalImg) return;
-                blModalImg.src = blImages[currentBlImageIndex];
-                blModalImg.alt = `Blue Lock Sample ${currentBlImageIndex + 1}`;
-                blThumbnailElements.forEach((thumb, index) => {
-                    if (index === currentBlImageIndex) thumb.classList.add('active');
-                    else thumb.classList.remove('active');
-                });
-            }
-            function openBlModal(index) {
-                currentBlImageIndex = index;
-                updateBlModalImage();
-                blModal.classList.remove('hidden');
-            }
-            function closeBlModal() { blModal.classList.add('hidden'); }
-            function showNextBlImage() {
-                currentBlImageIndex = (currentBlImageIndex + 1) % blImages.length;
-                updateBlModalImage();
-            }
-            function showPrevBlImage() {
-                currentBlImageIndex = (currentBlImageIndex - 1 + blImages.length) % blImages.length;
-                updateBlModalImage();
-            }
-            if(openBlModalBtn) openBlModalBtn.addEventListener('click', () => openBlModal(0));
-            if(closeBlModalBtn) closeBlModalBtn.addEventListener('click', closeBlModal);
-            if(blNextBtn) blNextBtn.addEventListener('click', showNextBlImage);
-            if(blPrevBtn) blPrevBtn.addEventListener('click', showPrevBlImage);
-            if(blModal) blModal.addEventListener('click', (e) => {
-                if (e.target === blModal) closeBlModal();
-            });
-            // ===== End Blue Lock Modal Script =====
+            setupModal('bl-modal', 'open-bl-modal', 'close-bl-modal', ['bl1.jpg', 'bl2.jpg', 'bl3.jpg', 'bl4.jpg'], 'bl-modal-main-image', 'bl-modal-prev', 'bl-modal-next', 'bl-modal-thumbnails');
+            setupModal('rag-modal', 'open-rag-modal', 'close-rag-modal', ['rent1.webp', 'rent2.webp', 'rent3.webp', 'rent4.jpg'], 'rag-modal-main-image', 'rag-modal-prev', 'rag-modal-next', 'rag-modal-thumbnails');
+            setupModal('op-modal', 'open-op-modal', 'close-op-modal', ['op1.jpg', 'op2.webp', 'op3.jpg', 'op4.jpg'], 'op-modal-main-image', 'op-modal-prev', 'op-modal-next', 'op-modal-thumbnails');
+            setupModal('toni-modal', 'open-toni-modal', 'close-toni-modal', ['toni1.png', 'toni2.png', 'toni3.png', 'toni4.png'], 'toni-modal-main-image', 'toni-modal-prev', 'toni-modal-next', 'toni-modal-thumbnails');
+            setupModal('dn-modal', 'open-dn-modal', 'close-dn-modal', ['dn1.jpg', 'dn2.webp', 'dn3.png', 'dn4.webp'], 'dn-modal-main-image', 'dn-modal-prev', 'dn-modal-next', 'dn-modal-thumbnails');
+            setupModal('tr-modal', 'open-tr-modal', 'close-tr-modal', ['tr1.jpeg', 'tr2.jpg', 'tr3.jpg', 'tr4.jpeg'], 'tr-modal-main-image', 'tr-modal-prev', 'tr-modal-next', 'tr-modal-thumbnails');
 
-            // ===== Rent-a-Girlfriend Modal Script =====
-            const ragImages = ['rent1.webp', 'rent2.webp', 'rent3.webp', 'rent4.jpg'];
-            let currentRagImageIndex = 0;
-            const openRagModalBtn = document.getElementById('open-rag-modal');
-            const ragModal = document.getElementById('rag-modal');
-            const closeRagModalBtn = document.getElementById('close-rag-modal');
-            const ragModalImg = document.getElementById('rag-modal-main-image');
-            const ragPrevBtn = document.getElementById('rag-modal-prev');
-            const ragNextBtn = document.getElementById('rag-modal-next');
-            const ragThumbnailContainer = document.getElementById('rag-modal-thumbnails');
-            if(ragThumbnailContainer) {
-                ragThumbnailContainer.innerHTML = ''; 
-                ragImages.forEach((imgSrc, index) => {
-                    const thumb = document.createElement('img');
-                    thumb.src = imgSrc;
-                    thumb.alt = `Rent-a-Girlfriend Sample ${index + 1}`;
-                    thumb.classList.add('modal-thumbnail', 'w-20', 'h-20', 'object-cover', 'rounded');
-                    thumb.dataset.index = index;
-                    thumb.addEventListener('click', () => openRagModal(index));
-                    ragThumbnailContainer.appendChild(thumb);
-                });
-            }
-            const ragThumbnailElements = ragThumbnailContainer ? ragThumbnailContainer.querySelectorAll('.modal-thumbnail') : [];
-            function updateRagModalImage() {
-                if(!ragModalImg) return;
-                ragModalImg.src = ragImages[currentRagImageIndex];
-                ragModalImg.alt = `Rent-a-Girlfriend Sample ${currentRagImageIndex + 1}`;
-                ragThumbnailElements.forEach((thumb, index) => {
-                    if (index === currentRagImageIndex) thumb.classList.add('active');
-                    else thumb.classList.remove('active');
-                });
-            }
-            function openRagModal(index) {
-                currentRagImageIndex = index;
-                updateRagModalImage();
-                ragModal.classList.remove('hidden');
-            }
-            function closeRagModal() { ragModal.classList.add('hidden'); }
-            function showNextRagImage() {
-                currentRagImageIndex = (currentRagImageIndex + 1) % ragImages.length;
-                updateRagModalImage();
-            }
-            function showPrevRagImage() {
-                currentRagImageIndex = (currentRagImageIndex - 1 + ragImages.length) % ragImages.length;
-                updateRagModalImage();
-            }
-            if(openRagModalBtn) openRagModalBtn.addEventListener('click', () => openRagModal(0));
-            if(closeRagModalBtn) closeRagModalBtn.addEventListener('click', closeRagModal);
-            if(ragNextBtn) ragNextBtn.addEventListener('click', showNextRagImage);
-            if(ragPrevBtn) ragPrevBtn.addEventListener('click', showPrevRagImage);
-            if(ragModal) ragModal.addEventListener('click', (e) => {
-                if (e.target === ragModal) closeRagModal();
-            });
-            // ===== End Rent-a-Girlfriend Modal Script =====
-
-            // ===== One Piece Modal Script =====
-            const opImages = ['op1.jpg', 'op2.webp', 'op3.jpg', 'op4.jpg'];
-            let currentOpImageIndex = 0;
-            const openOpModalBtn = document.getElementById('open-op-modal');
-            const opModal = document.getElementById('op-modal');
-            const closeOpModalBtn = document.getElementById('close-op-modal');
-            const opModalImg = document.getElementById('op-modal-main-image');
-            const opPrevBtn = document.getElementById('op-modal-prev');
-            const opNextBtn = document.getElementById('op-modal-next');
-            const opThumbnailContainer = document.getElementById('op-modal-thumbnails');
-            if(opThumbnailContainer) {
-                opThumbnailContainer.innerHTML = '';
-                opImages.forEach((imgSrc, index) => {
-                    const thumb = document.createElement('img');
-                    thumb.src = imgSrc;
-                    thumb.alt = `One Piece Sample ${index + 1}`;
-                    thumb.classList.add('modal-thumbnail', 'w-20', 'h-20', 'object-cover', 'rounded');
-                    thumb.dataset.index = index;
-                    thumb.addEventListener('click', () => openOpModal(index));
-                    opThumbnailContainer.appendChild(thumb);
-                });
-            }
-            const opThumbnailElements = opThumbnailContainer ? opThumbnailContainer.querySelectorAll('.modal-thumbnail') : [];
-            function updateOpModalImage() {
-                if(!opModalImg) return;
-                opModalImg.src = opImages[currentOpImageIndex];
-                opModalImg.alt = `One Piece Sample ${currentOpImageIndex + 1}`;
-                opThumbnailElements.forEach((thumb, index) => {
-                    if (index === currentOpImageIndex) thumb.classList.add('active');
-                    else thumb.classList.remove('active');
-                });
-            }
-            function openOpModal(index) {
-                currentOpImageIndex = index;
-                updateOpModalImage();
-                opModal.classList.remove('hidden');
-            }
-            function closeOpModal() { opModal.classList.add('hidden'); }
-            function showNextOpImage() {
-                currentOpImageIndex = (currentOpImageIndex + 1) % opImages.length;
-                updateOpModalImage();
-            }
-            function showPrevOpImage() {
-                currentOpImageIndex = (currentOpImageIndex - 1 + opImages.length) % opImages.length;
-                updateOpModalImage();
-            }
-            if(openOpModalBtn) openOpModalBtn.addEventListener('click', () => openOpModal(0));
-            if(closeOpModalBtn) closeOpModalBtn.addEventListener('click', closeOpModal);
-            if(opNextBtn) opNextBtn.addEventListener('click', showNextOpImage);
-            if(opPrevBtn) opPrevBtn.addEventListener('click', showPrevOpImage);
-            if(opModal) opModal.addEventListener('click', (e) => {
-                if (e.target === opModal) closeOpModal();
-            });
-            // ===== End One Piece Modal Script =====
-
-            // ===== Tonikawa Modal Script =====
-            const toniImages = ['toni1.png', 'toni2.png', 'toni3.png', 'toni4.png'];
-            let currentToniImageIndex = 0;
-            const openToniModalBtn = document.getElementById('open-toni-modal');
-            const toniModal = document.getElementById('toni-modal');
-            const closeToniModalBtn = document.getElementById('close-toni-modal');
-            const toniModalImg = document.getElementById('toni-modal-main-image');
-            const toniPrevBtn = document.getElementById('toni-modal-prev');
-            const toniNextBtn = document.getElementById('toni-modal-next');
-            const toniThumbnailContainer = document.getElementById('toni-modal-thumbnails');
-            if(toniThumbnailContainer) {
-                toniThumbnailContainer.innerHTML = '';
-                toniImages.forEach((imgSrc, index) => {
-                    const thumb = document.createElement('img');
-                    thumb.src = imgSrc;
-                    thumb.alt = `Tonikawa Sample ${index + 1}`;
-                    thumb.classList.add('modal-thumbnail', 'w-20', 'h-20', 'object-cover', 'rounded');
-                    thumb.dataset.index = index;
-                    thumb.addEventListener('click', () => openToniModal(index));
-                    toniThumbnailContainer.appendChild(thumb);
-                });
-            }
-            const toniThumbnailElements = toniThumbnailContainer ? toniThumbnailContainer.querySelectorAll('.modal-thumbnail') : [];
-            function updateToniModalImage() {
-                if(!toniModalImg) return;
-                toniModalImg.src = toniImages[currentToniImageIndex];
-                toniModalImg.alt = `Tonikawa Sample ${currentToniImageIndex + 1}`;
-                toniThumbnailElements.forEach((thumb, index) => {
-                    if (index === currentToniImageIndex) thumb.classList.add('active');
-                    else thumb.classList.remove('active');
-                });
-            }
-            function openToniModal(index) {
-                currentToniImageIndex = index;
-                updateToniModalImage();
-                toniModal.classList.remove('hidden');
-            }
-            function closeToniModal() { toniModal.classList.add('hidden'); }
-            function showNextToniImage() {
-                currentToniImageIndex = (currentToniImageIndex + 1) % toniImages.length;
-                updateToniModalImage();
-            }
-            function showPrevToniImage() {
-                currentToniImageIndex = (currentToniImageIndex - 1 + toniImages.length) % toniImages.length;
-                updateToniModalImage();
-            }
-            if(openToniModalBtn) openToniModalBtn.addEventListener('click', () => openToniModal(0));
-            if(closeToniModalBtn) closeToniModalBtn.addEventListener('click', closeToniModal);
-            if(toniNextBtn) toniNextBtn.addEventListener('click', showNextToniImage);
-            if(toniPrevBtn) toniPrevBtn.addEventListener('click', showPrevToniImage);
-            if(toniModal) toniModal.addEventListener('click', (e) => {
-                if (e.target === toniModal) closeToniModal();
-            });
-            // ===== End Tonikawa Modal Script =====
-
-            // ===== Death Note Modal Script =====
-            const dnImages = ['dn1.jpg', 'dn2.webp', 'dn3.png', 'dn4.webp'];
-            let currentDnImageIndex = 0;
-            const openDnModalBtn = document.getElementById('open-dn-modal');
-            const dnModal = document.getElementById('dn-modal');
-            const closeDnModalBtn = document.getElementById('close-dn-modal');
-            const dnModalImg = document.getElementById('dn-modal-main-image');
-            const dnPrevBtn = document.getElementById('dn-modal-prev');
-            const dnNextBtn = document.getElementById('dn-modal-next');
-            const dnThumbnailContainer = document.getElementById('dn-modal-thumbnails');
-            if(dnThumbnailContainer) {
-                dnThumbnailContainer.innerHTML = '';
-                dnImages.forEach((imgSrc, index) => {
-                    const thumb = document.createElement('img');
-                    thumb.src = imgSrc;
-                    thumb.alt = `Death Note Sample ${index + 1}`;
-                    thumb.classList.add('modal-thumbnail', 'w-20', 'h-20', 'object-cover', 'rounded');
-                    thumb.dataset.index = index;
-                    thumb.addEventListener('click', () => openDnModal(index));
-                    dnThumbnailContainer.appendChild(thumb);
-                });
-            }
-            const dnThumbnailElements = dnThumbnailContainer ? dnThumbnailContainer.querySelectorAll('.modal-thumbnail') : [];
-            function updateDnModalImage() {
-                if(!dnModalImg) return;
-                dnModalImg.src = dnImages[currentDnImageIndex];
-                dnModalImg.alt = `Death Note Sample ${currentDnImageIndex + 1}`;
-                dnThumbnailElements.forEach((thumb, index) => {
-                    if (index === currentDnImageIndex) thumb.classList.add('active');
-                    else thumb.classList.remove('active');
-                });
-            }
-            function openDnModal(index) {
-                currentDnImageIndex = index;
-                updateDnModalImage();
-                dnModal.classList.remove('hidden');
-            }
-            function closeDnModal() { dnModal.classList.add('hidden'); }
-            function showNextDnImage() {
-                currentDnImageIndex = (currentDnImageIndex + 1) % dnImages.length;
-                updateDnModalImage();
-            }
-            function showPrevDnImage() {
-                currentDnImageIndex = (currentDnImageIndex - 1 + dnImages.length) % dnImages.length;
-                updateDnModalImage();
-            }
-            if(openDnModalBtn) openDnModalBtn.addEventListener('click', () => openDnModal(0));
-            if(closeDnModalBtn) closeDnModalBtn.addEventListener('click', closeDnModal);
-            if(dnNextBtn) dnNextBtn.addEventListener('click', showNextDnImage);
-            if(dnPrevBtn) dnPrevBtn.addEventListener('click', showPrevDnImage);
-            if(dnModal) dnModal.addEventListener('click', (e) => {
-                if (e.target === dnModal) closeDnModal();
-            });
-            // ===== End Death Note Modal Script =====
-
-            // ===== Tokyo Revengers Modal Script =====
-            const trImages = ['tr1.jpeg', 'tr2.jpg', 'tr3.jpg', 'tr4.jpeg'];
-            let currentTrImageIndex = 0;
-            const openTrModalBtn = document.getElementById('open-tr-modal');
-            const trModal = document.getElementById('tr-modal');
-            const closeTrModalBtn = document.getElementById('close-tr-modal');
-            const trModalImg = document.getElementById('tr-modal-main-image');
-            const trPrevBtn = document.getElementById('tr-modal-prev');
-            const trNextBtn = document.getElementById('tr-modal-next');
-            const trThumbnailContainer = document.getElementById('tr-modal-thumbnails');
-            if(trThumbnailContainer) {
-                trThumbnailContainer.innerHTML = '';
-                trImages.forEach((imgSrc, index) => {
-                    const thumb = document.createElement('img');
-                    thumb.src = imgSrc;
-                    thumb.alt = `Tokyo Revengers Sample ${index + 1}`;
-                    thumb.classList.add('modal-thumbnail', 'w-20', 'h-20', 'object-cover', 'rounded');
-                    thumb.dataset.index = index;
-                    thumb.addEventListener('click', () => openTrModal(index));
-                    trThumbnailContainer.appendChild(thumb);
-                });
-            }
-            const trThumbnailElements = trThumbnailContainer ? trThumbnailContainer.querySelectorAll('.modal-thumbnail') : [];
-            function updateTrModalImage() {
-                if(!trModalImg) return;
-                trModalImg.src = trImages[currentTrImageIndex];
-                trModalImg.alt = `Tokyo Revengers Sample ${currentTrImageIndex + 1}`;
-                trThumbnailElements.forEach((thumb, index) => {
-                    if (index === currentTrImageIndex) thumb.classList.add('active');
-                    else thumb.classList.remove('active');
-                });
-            }
-            function openTrModal(index) {
-                currentTrImageIndex = index;
-                updateTrModalImage();
-                trModal.classList.remove('hidden');
-            }
-            function closeTrModal() { trModal.classList.add('hidden'); }
-            function showNextTrImage() {
-                currentTrImageIndex = (currentTrImageIndex + 1) % trImages.length;
-                updateTrModalImage();
-            }
-            function showPrevTrImage() {
-                currentTrImageIndex = (currentTrImageIndex - 1 + trImages.length) % trImages.length;
-                updateTrModalImage();
-            }
-            if(openTrModalBtn) openTrModalBtn.addEventListener('click', () => openTrModal(0));
-            if(closeTrModalBtn) closeTrModalBtn.addEventListener('click', closeTrModal);
-            if(trNextBtn) trNextBtn.addEventListener('click', showNextTrImage);
-            if(trPrevBtn) trPrevBtn.addEventListener('click', showPrevTrImage);
-            if(trModal) trModal.addEventListener('click', (e) => {
-                if (e.target === trModal) closeTrModal();
-            });
-            // ===== End Tokyo Revengers Modal Script =====
-
-            // ===== NEW: Scroll Reveal Animation Script =====
+            // ===== Scroll Reveal Animation Script =====
             const revealElements = document.querySelectorAll('.js-reveal');
-
             const revealObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        // Optional: Stop observing once it's visible to save resources
-                        // observer.unobserve(entry.target);
                     }
-                    // Optional: Re-hide when scrolling up (uncomment the else block)
-                    // else {
-                    //     entry.target.classList.remove('is-visible');
-                    // }
                 });
             }, {
-                threshold: 0.1 // Trigger when 10% of the element is visible
+                threshold: 0.1 
             });
-
             revealElements.forEach(el => {
                 revealObserver.observe(el);
             });
-            // ===== End Scroll Reveal Animation Script =====
+
+            // ===== Memory Game Script =====
+            const gameBoard = document.getElementById('game-board');
+            const movesSpan = document.getElementById('game-moves');
+            const resetBtn = document.getElementById('game-reset-btn');
+            const winMessage = document.getElementById('game-win-message');
+            const gameSymbols = ['🍥', '💥', '⚔️', '💭', '🍙', '⛩️', '🍥', '💥', '⚔️', '💭', '🍙', '⛩️'];
+            let firstCard = null;
+            let secondCard = null;
+            let lockBoard = false;
+            let moves = 0;
+            let matchedPairs = 0;
+
+            function shuffle(array) {
+                let currentIndex = array.length, randomIndex;
+                while (currentIndex != 0) {
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
+                    [array[currentIndex], array[randomIndex]] = [
+                        array[randomIndex], array[currentIndex]];
+                }
+                return array;
+            }
+
+            function createBoard() {
+                gameBoard.innerHTML = '';
+                moves = 0;
+                matchedPairs = 0;
+                firstCard = null;
+                secondCard = null;
+                lockBoard = false;
+                movesSpan.textContent = '0';
+                winMessage.classList.add('hidden');
+                const shuffledSymbols = shuffle(gameSymbols.slice()); 
+                shuffledSymbols.forEach(symbol => {
+                    const card = document.createElement('div');
+                    card.classList.add('game-card');
+                    card.dataset.symbol = symbol;
+                    card.innerHTML = `
+                        <div class="game-card-face card-front">?</div>
+                        <div class="game-card-face card-back">${symbol}</div>
+                    `;
+                    card.addEventListener('click', handleCardClick);
+                    gameBoard.appendChild(card);
+                });
+            }
+
+            function handleCardClick() {
+                if (lockBoard) return;
+                if (this === firstCard) return; 
+                if (this.classList.contains('is-matched')) return; 
+                this.classList.add('is-flipped');
+                if (!firstCard) {
+                    firstCard = this;
+                    return;
+                }
+                secondCard = this;
+                lockBoard = true;
+                updateMoves();
+                checkForMatch();
+            }
+
+            function updateMoves() {
+                moves++;
+                movesSpan.textContent = moves;
+            }
+
+            function checkForMatch() {
+                const isMatch = firstCard.dataset.symbol === secondCard.dataset.symbol;
+                isMatch ? disableCards() : unflipCards();
+            }
+
+            function disableCards() {
+                firstCard.classList.add('is-matched');
+                secondCard.classList.add('is-matched');
+                matchedPairs++;
+                checkWinCondition();
+                resetBoard();
+            }
+
+            function unflipCards() {
+                setTimeout(() => {
+                    firstCard.classList.remove('is-flipped');
+                    secondCard.classList.remove('is-flipped');
+                    resetBoard();
+                }, 1200); 
+            }
+
+            function resetBoard() {
+                [firstCard, secondCard, lockBoard] = [null, null, false];
+            }
+
+            function checkWinCondition() {
+                if (matchedPairs === gameSymbols.length / 2) {
+                    setTimeout(() => {
+                         winMessage.classList.remove('hidden');
+                    }, 500); 
+                }
+            }
+
+            createBoard();
+            resetBtn.addEventListener('click', createBoard);
+
+            // ===== NEW: Trivia Game Script =====
+            const triviaQuestions = [
+                {
+                    question: "What is the name of the main character in 'One Piece'?",
+                    options: ["Naruto Uzumaki", "Ichigo Kurosaki", "Monkey D. Luffy", "Goku"],
+                    correctAnswer: "Monkey D. Luffy"
+                },
+                {
+                    question: "In 'Death Note', what is the name of the shinigami who drops the notebook?",
+                    options: ["Light", "L", "Misa", "Ryuk"],
+                    correctAnswer: "Ryuk"
+                },
+                {
+                    question: "Which demographic is manga like 'Sailor Moon' primarily aimed at?",
+                    options: ["Shonen (Teen Boys)", "Shojo (Teen Girls)", "Seinen (Adult Men)", "Josei (Adult Women)"],
+                    correctAnswer: "Shojo (Teen Girls)"
+                },
+                {
+                    question: "What does the word 'manga' (漫画) literally translate to?",
+                    options: ["Funny Pictures", "Moving Pictures", "Big Eyes", "Action Story"],
+                    correctAnswer: "Funny Pictures"
+                },
+                {
+                    question: "Who is the creator of 'Astro Boy', often called the 'God of Manga'?",
+                    options: ["Eiichiro Oda", "Akira Toriyama", "Osamu Tezuka", "Masashi Kishimoto"],
+                    correctAnswer: "Osamu Tezuka"
+                }
+            ];
+
+            const questionEl = document.getElementById('trivia-question');
+            const optionsEl = document.getElementById('trivia-options');
+            const nextBtn = document.getElementById('trivia-next-btn');
+            const resultEl = document.getElementById('trivia-result');
+
+            let currentQuestionIndex = 0;
+            let score = 0;
+
+            function startTrivia() {
+                currentQuestionIndex = 0;
+                score = 0;
+                resultEl.innerHTML = '';
+                nextBtn.innerHTML = translations[localStorage.getItem('language') || 'en']['trivia_next'] || "Next Question";
+                nextBtn.classList.remove('hidden');
+                showTriviaQuestion();
+            }
+
+            function showTriviaQuestion() {
+                resetTriviaState();
+                const currentQuestion = triviaQuestions[currentQuestionIndex];
+                questionEl.textContent = currentQuestion.question;
+
+                currentQuestion.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.classList.add('trivia-option');
+                    button.addEventListener('click', selectAnswer);
+                    optionsEl.appendChild(button);
+                });
+            }
+
+            function resetTriviaState() {
+                optionsEl.innerHTML = '';
+                nextBtn.classList.add('hidden');
+            }
+
+            function selectAnswer(e) {
+                const selectedButton = e.target;
+                const correct = selectedButton.textContent === triviaQuestions[currentQuestionIndex].correctAnswer;
+
+                if (correct) {
+                    selectedButton.classList.add('correct');
+                    score++;
+                } else {
+                    selectedButton.classList.add('wrong');
+                }
+
+                // Show the correct answer
+                Array.from(optionsEl.children).forEach(button => {
+                    if (button.textContent === triviaQuestions[currentQuestionIndex].correctAnswer) {
+                        button.classList.add('correct');
+                    }
+                    button.disabled = true; // Disable all options
+                });
+
+                // Show next button
+                nextBtn.classList.remove('hidden');
+                if (currentQuestionIndex === triviaQuestions.length - 1) {
+                    nextBtn.innerHTML = translations[localStorage.getItem('language') || 'en']['trivia_play_again'] || "Play Again?";
+                }
+            }
+
+            function showResults() {
+                questionEl.textContent = translations[localStorage.getItem('language') || 'en']['trivia_result_text'] || "Your Score";
+                optionsEl.innerHTML = '';
+                const scoreText = translations[localStorage.getItem('language') || 'en']['trivia_of'] || 'of';
+                resultEl.innerHTML = `${score} ${scoreText} ${triviaQuestions.length}`;
+                nextBtn.innerHTML = translations[localStorage.getItem('language') || 'en']['trivia_play_again'] || "Play Again?";
+                nextBtn.classList.remove('hidden');
+            }
+
+            nextBtn.addEventListener('click', () => {
+                if (currentQuestionIndex < triviaQuestions.length - 1) {
+                    currentQuestionIndex++;
+                    showTriviaQuestion();
+                } else {
+                    // If at the end, the button becomes "Play Again"
+                    if (nextBtn.innerHTML.includes(translations[localStorage.getItem('language') || 'en']['trivia_play_again']) || nextBtn.innerHTML.includes("Play Again?")) {
+                         startTrivia();
+                    } else {
+                         showResults();
+                    }
+                }
+            });
+
+            // Start the trivia game on load
+            startTrivia();
 
         });
     </script>
